@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 7583498316957110259}
   - component: {fileID: 5426414854941521231}
   - component: {fileID: 7995673281799840646}
+  - component: {fileID: -6640166812448963486}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 84b4521f0cedbd3439080380ad96876b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -149,8 +150,8 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.28866667}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.9, y: 1.1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -174,5 +175,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dda9bf305f4a4f54d9ac27269fcccdb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrustPower: 5
-  rotationSpeed: 200
+  thrustPower: 2
+  rotationSpeed: 100
+--- !u!114 &-6640166812448963486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13437345199283933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cd31694003f0fb4cab489c3afa7a76b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bluePortalPrefab: {fileID: 2318222690110398993, guid: 489796f53dfc55a4bb4f403e603725e3, type: 3}
+  redPortalPrefab: {fileID: 4192561162801377119, guid: 834f605e5d1f50c46b56e0e27612f640, type: 3}

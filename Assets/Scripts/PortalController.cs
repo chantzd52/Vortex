@@ -11,10 +11,12 @@ public class PortalController : MonoBehaviour
     private Vector3 mousePosition;
     private Camera mainCamera;
 
-    private Queue<GameObject> blueStoredObjects = new Queue<GameObject>();
-    private Queue<GameObject> redStoredObjects = new Queue<GameObject>();
-    private Dictionary<GameObject, float> ignorePortalTime = new Dictionary<GameObject, float>();
-    private float ignoreDuration = 0.5f;  // Time in seconds to ignore portal after ejecting
+    private Queue<GameObject> queueForRed = new Queue<GameObject>();
+    private Dictionary<GameObject, Vector2> originalVelocities = new Dictionary<GameObject, Vector2>();
+    private Dictionary<GameObject, float> cooldownTimes = new Dictionary<GameObject, float>();
+
+    public float cooldownDuration = 2.0f; // Cooldown to prevent immediate re-entry
+    public float ejectDelay = 1.0f; // Delay between ejecting objects from the red portal
 
     void Start()
     {
@@ -24,119 +26,126 @@ public class PortalController : MonoBehaviour
     void Update()
     {
         HandlePortalPlacement();
-        ClearIgnoreList();
+        TryReactivateObjects(redPortal, queueForRed);
     }
 
     private void HandlePortalPlacement()
     {
         mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0; // Ensure the z-position is zero to keep it in 2D plane
+        mousePosition.z = 0;
 
-        if (Input.GetMouseButtonDown(0)) // Left mouse button
+        if (Input.GetMouseButtonDown(0)) // Left mouse button for blue portal
         {
-            if (bluePortal != null) // If already placed, pick it up
-                Destroy(bluePortal);
-            else
-            {
-                bluePortal = Instantiate(bluePortalPrefab, mousePosition, Quaternion.identity);
-                bluePortal.GetComponent<Portal>().SetPortalController(this, "blue");
-            }
+            TogglePortal(ref bluePortal, bluePortalPrefab, "blue");
         }
-        if (Input.GetMouseButton(0) && bluePortal != null) // Adjust direction while holding
+        if (Input.GetMouseButton(0) && bluePortal != null) // Left mouse button held down
         {
-            Vector3 direction = mousePosition - bluePortal.transform.position;
-            bluePortal.transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
+            // Update blue portal's orientation to face the mouse
+            Vector2 direction = mousePosition - bluePortal.transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            bluePortal.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         }
-        if (Input.GetMouseButtonDown(1)) // Right mouse button
+        if (Input.GetMouseButtonDown(1)) // Right mouse button for red portal
         {
-            if (redPortal != null) // If already placed, pick it up
-                Destroy(redPortal);
-            else
-            {
-                redPortal = Instantiate(redPortalPrefab, mousePosition, Quaternion.identity);
-                redPortal.GetComponent<Portal>().SetPortalController(this, "red");
-            }
+            TogglePortal(ref redPortal, redPortalPrefab, "red");
         }
-        if (Input.GetMouseButton(1) && redPortal != null) // Adjust direction while holding
+        if (Input.GetMouseButton(1) && redPortal != null) // Right mouse button held down
         {
-            Vector3 direction = mousePosition - redPortal.transform.position;
-            redPortal.transform.rotation = Quaternion.LookRotation(Vector3.forward, direction);
+            // Update red portal's orientation to face the mouse
+            Vector2 direction = mousePosition - redPortal.transform.position;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            redPortal.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+    }
+
+    private void TogglePortal(ref GameObject portal, GameObject portalPrefab, string color)
+    {
+        if (portal == null)
+        {
+            portal = Instantiate(portalPrefab, mousePosition, Quaternion.identity);
+            portal.GetComponent<Portal>().SetPortalController(this, color);
+        }
+        else
+        {
+            portal.SetActive(!portal.activeSelf);
+            if (portal.activeSelf)
+                portal.transform.position = mousePosition;
         }
     }
 
     public void EnterPortal(GameObject obj, string portalColor)
     {
-        if (ignorePortalTime.ContainsKey(obj) && Time.time < ignorePortalTime[obj])
-            return;  // Ignore this object if it's in the cooldown period
+        if (portalColor == "blue" && obj.tag == "Player")
+        {
+            if (redPortal != null && redPortal.activeSelf)
+            {
+                TeleportPlayer(obj, redPortal.transform.position);
+            }
+            else
+            {
+                GameOver(); // Red portal not active, game over
+            }
+        }
+        else if (portalColor == "blue" && obj.tag != "Player")
+        {
+            if (cooldownTimes.ContainsKey(obj) && Time.time < cooldownTimes[obj]) return;
 
-        if (portalColor == "blue" && redPortal != null)
-        {
-            Eject(obj, redPortal.transform.position, redPortal.transform.up, "red");
-        }
-        else if (portalColor == "red" && bluePortal != null)
-        {
-            Eject(obj, bluePortal.transform.position, bluePortal.transform.up, "blue");
-        }
-        else
-        {
-            StoreObject(obj, portalColor);
+            Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                originalVelocities[obj] = rb.velocity; // Store original velocity
+            }
+
+            SetObjectInactive(obj);
+            queueForRed.Enqueue(obj);
+            cooldownTimes[obj] = Time.time + cooldownDuration;
         }
     }
 
-    private void StoreObject(GameObject obj, string portalColor)
+    private void TeleportPlayer(GameObject player, Vector3 exitPosition)
     {
-        obj.SetActive(false);
-        if (portalColor == "blue")
-            blueStoredObjects.Enqueue(obj);
-        else
-            redStoredObjects.Enqueue(obj);
+        player.transform.position = exitPosition; // Teleport player to red portal position
     }
 
-    private void Eject(GameObject obj, Vector3 position, Vector3 direction, string portalColor)
+    private void GameOver()
     {
-        obj.SetActive(true);
-        obj.transform.position = position;
-        obj.transform.up = direction;
+        Debug.Log("Game Over: Red portal not active!");
+        // Implement actual game over mechanics (UI display, scene reset, etc.)
+    }
+
+    private void TryReactivateObjects(GameObject portal, Queue<GameObject> queue)
+    {
+        if (portal != null && portal.activeSelf && queue.Count > 0)
+        {
+            GameObject obj = queue.Dequeue();
+            ReactivateObject(obj, portal.transform.position);
+        }
+    }
+
+    private void ReactivateObject(GameObject obj, Vector3 position)
+{
+    obj.SetActive(true);
+    obj.transform.position = position;
+    Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+    if (rb != null && originalVelocities.ContainsKey(obj))
+    {
+        rb.isKinematic = false;
+
+        // Apply the stored velocity magnitude in the direction the portal is facing
+        Vector2 exitDirection = redPortal.transform.right; // Assuming the portal's "forward" direction is along its local X-axis
+        rb.velocity = exitDirection * originalVelocities[obj].magnitude;
+        
+        originalVelocities.Remove(obj);
+    }
+}
+
+    private void SetObjectInactive(GameObject obj)
+    {
         Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            rb.velocity = direction * rb.velocity.magnitude; // Maintain the speed but update the direction
+            rb.isKinematic = true;
         }
-        SetIgnore(obj, portalColor);
-    }
-
-    private void SetIgnore(GameObject obj, string portalColor)
-    {
-        if (!ignorePortalTime.ContainsKey(obj))
-            ignorePortalTime[obj] = Time.time + ignoreDuration;
-        else
-            ignorePortalTime[obj] = Time.time + ignoreDuration;
-    }
-
-    private void ClearIgnoreList()
-    {
-        List<GameObject> toRemove = new List<GameObject>();
-        foreach (var pair in ignorePortalTime)
-        {
-            if (Time.time > pair.Value)
-                toRemove.Add(pair.Key);
-        }
-
-        foreach (var obj in toRemove)
-            ignorePortalTime.Remove(obj);
-    }
-
-    private void ReleaseStoredObjects()
-    {
-        while (blueStoredObjects.Count > 0)
-        {
-            GameObject obj = blueStoredObjects.Dequeue();
-            Eject(obj, redPortal.transform.position, redPortal.transform.up, "red");
-        }
-        while (redStoredObjects.Count > 0)
-        {
-            GameObject obj = redStoredObjects.Dequeue();
-            Eject(obj, bluePortal.transform.position, bluePortal.transform.up, "blue");
-        }
+        obj.SetActive(false);
     }
 }

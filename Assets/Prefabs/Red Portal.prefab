@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7391962213601781986}
   - component: {fileID: 4155794005418473660}
   - component: {fileID: 7369750565185009157}
-  - component: {fileID: 254516762981665115}
+  - component: {fileID: -3691421150729228493}
   m_Layer: 0
   m_Name: Red Portal
   m_TagString: Untagged
@@ -76,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.9528302, g: 0.29214135, b: 0.32000893, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 3976e0a938a723c46a5e529562b47eff, type: 3}
+  m_Color: {r: 0.990566, g: 0.990566, b: 0.990566, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -149,7 +149,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &254516762981665115
+--- !u!114 &-3691421150729228493
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
