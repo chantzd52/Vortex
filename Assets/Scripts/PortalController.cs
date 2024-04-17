@@ -15,6 +15,8 @@ public class PortalController : MonoBehaviour
     private Dictionary<GameObject, Vector2> originalVelocities = new Dictionary<GameObject, Vector2>();
     private Dictionary<GameObject, float> cooldownTimes = new Dictionary<GameObject, float>();
 
+     public CircleCollider2D allowedPlacementArea; // Reference to the CircleCollider2D that defines where portals can be placed
+
     public float cooldownDuration = 2.0f; // Cooldown to prevent immediate re-entry
     public float ejectDelay = 1.0f; // Delay between ejecting objects from the red portal
 
@@ -30,33 +32,38 @@ public class PortalController : MonoBehaviour
     }
 
     private void HandlePortalPlacement()
-    {
-        mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0;
+{
+    mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+    mousePosition.z = 0;  // Adjust for 2D gameplay
 
-        if (Input.GetMouseButtonDown(0)) // Left mouse button for blue portal
-        {
-            TogglePortal(ref bluePortal, bluePortalPrefab, "blue");
-        }
-        if (Input.GetMouseButton(0) && bluePortal != null) // Left mouse button held down
-        {
-            // Update blue portal's orientation to face the mouse
-            Vector2 direction = mousePosition - bluePortal.transform.position;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            bluePortal.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        }
-        if (Input.GetMouseButtonDown(1)) // Right mouse button for red portal
-        {
-            TogglePortal(ref redPortal, redPortalPrefab, "red");
-        }
-        if (Input.GetMouseButton(1) && redPortal != null) // Right mouse button held down
-        {
-            // Update red portal's orientation to face the mouse
-            Vector2 direction = mousePosition - redPortal.transform.position;
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            redPortal.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        }
+    if (Input.GetMouseButtonDown(0) && IsWithinPlacementArea(mousePosition)) // Left mouse button for blue portal
+    {
+        TogglePortal(ref bluePortal, bluePortalPrefab, "blue");
     }
+    if (Input.GetMouseButton(0) && bluePortal != null) // Left mouse button held down
+    {
+        // Update blue portal's orientation to face the mouse
+        Vector2 direction = mousePosition - bluePortal.transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        bluePortal.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+    if (Input.GetMouseButtonDown(1) && IsWithinPlacementArea(mousePosition)) // Right mouse button for red portal
+    {
+        TogglePortal(ref redPortal, redPortalPrefab, "red");
+    }
+    if (Input.GetMouseButton(1) && redPortal != null) // Right mouse button held down
+    {
+        // Update red portal's orientation to face the mouse
+        Vector2 direction = mousePosition - redPortal.transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        redPortal.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+}
+
+private bool IsWithinPlacementArea(Vector3 position)
+{
+    return allowedPlacementArea.OverlapPoint(position);  // Check if the position is within the allowed area
+}
 
     private void TogglePortal(ref GameObject portal, GameObject portalPrefab, string color)
     {
@@ -72,6 +79,7 @@ public class PortalController : MonoBehaviour
                 portal.transform.position = mousePosition;
         }
     }
+
 
     public void EnterPortal(GameObject obj, string portalColor)
     {
