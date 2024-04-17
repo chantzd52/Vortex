@@ -47,4 +47,6 @@ public class SpaceshipController : MonoBehaviour
             rb.angularVelocity = 0;
         }
     }
+
+    
 }

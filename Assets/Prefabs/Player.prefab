@@ -101,7 +101,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 2.5
-  m_LinearDrag: 0
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dda9bf305f4a4f54d9ac27269fcccdb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrustPower: 2
+  thrustPower: 50
   rotationSpeed: 100
 --- !u!114 &-6640166812448963486
 MonoBehaviour:
@@ -191,5 +191,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bluePortalPrefab: {fileID: 2318222690110398993, guid: 489796f53dfc55a4bb4f403e603725e3, type: 3}
   redPortalPrefab: {fileID: 4192561162801377119, guid: 834f605e5d1f50c46b56e0e27612f640, type: 3}
+  allowedPlacementArea: {fileID: 0}
   cooldownDuration: 2
   ejectDelay: 1

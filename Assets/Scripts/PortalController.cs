@@ -17,7 +17,7 @@ public class PortalController : MonoBehaviour
 
      public CircleCollider2D allowedPlacementArea; // Reference to the CircleCollider2D that defines where portals can be placed
 
-    public float cooldownDuration = 2.0f; // Cooldown to prevent immediate re-entry
+    public float cooldownDuration = 0f; // Cooldown to prevent immediate re-entry
     public float ejectDelay = 1.0f; // Delay between ejecting objects from the red portal
 
     void Start()
@@ -83,6 +83,11 @@ private bool IsWithinPlacementArea(Vector3 position)
 
     public void EnterPortal(GameObject obj, string portalColor)
     {
+
+        // Check if the object has the "Boundary" tag
+        if (obj.tag == "Boundary")
+            return;  // Do nothing if it's a boundary
+            
         if (portalColor == "blue" && obj.tag == "Player")
         {
             if (redPortal != null && redPortal.activeSelf)
