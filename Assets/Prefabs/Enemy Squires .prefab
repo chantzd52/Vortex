@@ -182,4 +182,4 @@ MonoBehaviour:
   shotsPerBurst: 3
   numberOfBursts: 2
   shootingRate: 3
-  speed: 0.2
+  speed: 0.5

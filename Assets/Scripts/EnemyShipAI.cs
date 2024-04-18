@@ -27,35 +27,47 @@ public class EnemyShipAI : MonoBehaviour
 
     private State currentState = State.Approaching;
 
+    void Start()
+    {
+        // Find the player by tag and set it as the target
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject != null)
+        {
+            player = playerObject.transform;
+        }
+    }
+
     void Update()
-{
-    float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+    {
+        if (player == null)
+        {
+            return; // If player is not found, do nothing
+        }
 
-    // Always look at the player
-    LookAtPlayer();
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-    // Move towards the player regardless of the shooting
-    if (distanceToPlayer > approachDistance)
-    {
-        MoveTowards(player.position);
-    }
-    else if (distanceToPlayer > retreatDistance) // Within approach distance but outside of retreat distance
-    {
-        // Enemy can either continue moving towards or stop moving if you want it to hover at this range
-        MoveTowards(player.position); // Optional: Comment this out if you want the enemy to stop moving when close enough
-    }
-    else
-    {
-        // Retreat if too close
-        MoveAwayFrom(player.position);
-    }
+        // Always look at the player
+        LookAtPlayer();
 
-    // Shoot if within shooting distance and the shooting conditions are met
-    if (distanceToPlayer <= shootingDistance)
-    {
-        Shoot();
+        // Handle movement and shooting based on distance to the player
+        if (distanceToPlayer > approachDistance)
+        {
+            MoveTowards(player.position);
+        }
+        else if (distanceToPlayer > retreatDistance)
+        {
+            MoveTowards(player.position);
+        }
+        else
+        {
+            MoveAwayFrom(player.position);
+        }
+
+        if (distanceToPlayer <= shootingDistance)
+        {
+            Shoot();
+        }
     }
-}
 
     private void Shoot()
     {
@@ -73,39 +85,39 @@ public class EnemyShipAI : MonoBehaviour
             if (currentBurstCount >= numberOfBursts)
             {
                 currentState = State.Retreating;
-                currentBurstCount = 0; // Reset burst count for next time
+                currentBurstCount = 0;
             }
         }
     }
 
-private void AimAndShoot()
-{
-    Vector3 directionToPlayer = (player.position - transform.position).normalized;
-    Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg - 90);
-    
-    // Offset the spawn position forward by a small amount, e.g., 1 unit
-    Vector3 spawnPosition = transform.position + directionToPlayer * 1f; // Adjust the multiplier to ensure clear separation
+    private void AimAndShoot()
+    {
+        Vector3 directionToPlayer = (player.position - transform.position).normalized;
+        Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg - 90);
 
-    GameObject bullet = Instantiate(bulletPrefab, spawnPosition, rotation);
-    bullet.GetComponent<Bullet>().SetShooter(gameObject);  // Set the shooter to this enemy object
-}
-private void MoveTowards(Vector3 target)
-{
-    transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-    LookAtPlayer();
-}
+        GameObject bullet = Instantiate(bulletPrefab, transform.position + directionToPlayer, rotation);
+        bullet.GetComponent<Bullet>().SetShooter(gameObject);
+    }
 
-private void MoveAwayFrom(Vector3 target)
-{
-    Vector3 directionAwayFromPlayer = transform.position - target;
-    transform.position += directionAwayFromPlayer.normalized * speed * Time.deltaTime;
-    LookAtPlayer();
-}
+    private void MoveTowards(Vector3 target)
+    {
+        transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        LookAtPlayer();
+    }
 
-private void LookAtPlayer()
-{
-    Vector3 directionToPlayer = player.position - transform.position;
-    float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg - 90f; // Adjusting by 90 degrees if needed
-    transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-}
+    private void MoveAwayFrom(Vector3 target)
+    {
+        Vector3 directionAwayFromPlayer = transform.position - target;
+        transform.position += directionAwayFromPlayer.normalized * speed * Time.deltaTime;
+        LookAtPlayer();
+    }
+
+    private void LookAtPlayer()
+    {
+        if (player == null) return; // Ensure player is valid before calculating the angle
+
+        Vector3 directionToPlayer = player.position - transform.position;
+        float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg - 90f;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+    }
 }

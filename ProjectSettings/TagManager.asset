@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - SpawnPoint
   - PortalArea
+  - Portal
+  - Bullet
   layers:
   - Default
   - TransparentFX

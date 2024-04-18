@@ -34,6 +34,12 @@ public class Bullet : MonoBehaviour
         {
             TriggerHitEffects(other.transform.position);
             Destroy(other.gameObject);
+            //Destroy object with tag portal
+            GameObject[] portals = GameObject.FindGameObjectsWithTag("Portal");
+            foreach (GameObject portal in portals)
+            {
+                Destroy(portal);
+            }
         }
 
         // The bullet harms other enemies immediately

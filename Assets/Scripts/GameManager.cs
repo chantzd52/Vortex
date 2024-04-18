@@ -1,29 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; // Include this if you are manipulating UI elements directly
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject playerPrefab; // Assign the player prefab in the inspector
-    public GameObject enemyPrefab;  // Assign the enemy prefab in the inspector
-    public Transform spawnPoint;    // Assign the spawn point for player
-    public Transform[] enemySpawnPoints; // Assign spawn points for enemies
-
-    public float spawnInterval = 5.0f; // Time in seconds between enemy spawns
+    public GameObject playerPrefab;
+    public Transform spawnPoint;
+    public Button respawnButton;
+    public EnemySpawner enemySpawner;
 
     private GameObject currentPlayer;
-    private float spawnTimer;
 
     void Start()
     {
         StartGame();
-        spawnTimer = spawnInterval; // Initialize the spawn timer
+        respawnButton.gameObject.SetActive(false);
+        respawnButton.onClick.AddListener(RespawnPlayer);
     }
 
     void Update()
     {
         CheckPlayerStatus();
-        EnemySpawnTimer();
     }
 
     void StartGame()
@@ -32,44 +30,41 @@ public class GameManager : MonoBehaviour
         {
             SpawnPlayer();
         }
+        enemySpawner.ResetSpawner(); // Start or restart enemy spawning
     }
 
     void CheckPlayerStatus()
     {
-        if (currentPlayer == null)
+        if (currentPlayer == null && !respawnButton.gameObject.activeInHierarchy)
         {
-            // Player has died
-            RespawnPlayer();
+            respawnButton.gameObject.SetActive(true);
         }
     }
 
     void SpawnPlayer()
     {
         currentPlayer = Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity);
-    }
-
-    void RespawnPlayer()
-    {
-        // Optionally add a delay or some effect
-        Invoke("SpawnPlayer", 2.0f); // Wait 2 seconds before respawning
-    }
-
-    void EnemySpawnTimer()
-    {
-        spawnTimer -= Time.deltaTime;
-        if (spawnTimer <= 0)
+        //clear enemys
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemies)
         {
-            SpawnEnemy();
-            spawnTimer = spawnInterval;
+            Destroy(enemy);
         }
+        //clear bullets
+        GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
+        foreach (GameObject bullet in bullets)
+        {
+            Destroy(bullet);
+        }
+        respawnButton.gameObject.SetActive(false);
     }
 
-    void SpawnEnemy()
+    public void RespawnPlayer()
     {
-        if (enemySpawnPoints.Length > 0)
+        if (currentPlayer == null)
         {
-            Transform spawnLocation = enemySpawnPoints[Random.Range(0, enemySpawnPoints.Length)];
-            Instantiate(enemyPrefab, spawnLocation.position, Quaternion.identity);
+            SpawnPlayer();
+            enemySpawner.ResetSpawner(); // Ensure enemy spawning continues
         }
     }
 }
