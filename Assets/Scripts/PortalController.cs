@@ -13,7 +13,7 @@ public class PortalController : MonoBehaviour
 
     private Dictionary<GameObject, Vector2> originalVelocities = new Dictionary<GameObject, Vector2>();
     private Dictionary<GameObject, float> teleportCooldowns = new Dictionary<GameObject, float>();
-public float teleportCooldownDuration = 1.0f; // seconds
+public float teleportCooldownDuration = 0.5f; // seconds
     public CircleCollider2D allowedPlacementArea; // Area where portals can be placed
 
     void Start()
@@ -64,12 +64,11 @@ public float teleportCooldownDuration = 1.0f; // seconds
     }
 
     private void UpdatePortalOrientation(GameObject portal)
-    {
-        Vector2 direction = mousePosition - portal.transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        portal.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-    }
-
+{
+    Vector2 direction = mousePosition - portal.transform.position;
+    float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+    portal.transform.rotation = Quaternion.Euler(0, 0, angle);
+}
     private bool IsWithinPlacementArea(Vector3 position)
     {
         return allowedPlacementArea.OverlapPoint(position);
@@ -79,7 +78,7 @@ public float teleportCooldownDuration = 1.0f; // seconds
 {
     if (obj.tag == "Boundary") return; // Skip boundaries
 
-    // Check if the object is on cooldown
+    // Check if the object is on cooldown to avoid immediate re-entry problems
     if (teleportCooldowns.ContainsKey(obj) && teleportCooldowns[obj] > Time.time)
     {
         Debug.Log($"{obj.name} is on cooldown.");
@@ -87,24 +86,24 @@ public float teleportCooldownDuration = 1.0f; // seconds
     }
 
     GameObject exitPortal = null;
-    Vector3 exitDirection = Vector3.right;
+    Quaternion exitDirection = Quaternion.identity;
 
     if (portalColor == "blue" && redPortal != null && redPortal.activeSelf)
     {
         exitPortal = redPortal;
-        exitDirection = redPortal.transform.right;
+        exitDirection = redPortal.transform.rotation;
     }
     else if (portalColor == "red" && bluePortal != null && bluePortal.activeSelf)
     {
         exitPortal = bluePortal;
-        exitDirection = bluePortal.transform.right;
+        exitDirection = bluePortal.transform.rotation;
     }
 
     if (exitPortal != null)
     {
+        // Immediately teleport without deactivating
         Teleport(obj, exitPortal.transform.position, exitDirection);
-        // Update cooldown
-        teleportCooldowns[obj] = Time.time + teleportCooldownDuration;
+        teleportCooldowns[obj] = Time.time + teleportCooldownDuration;  // update cooldown
     }
     else
     {
@@ -112,15 +111,14 @@ public float teleportCooldownDuration = 1.0f; // seconds
     }
 }
 
-    private void Teleport(GameObject obj, Vector3 position, Vector3 exitDirection)
+   private void Teleport(GameObject obj, Vector3 position, Quaternion exitRotation)
+{
+    Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+    if (rb != null)
     {
-        Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
-        if (rb != null && originalVelocities.ContainsKey(obj))
-        {
-            rb.velocity = exitDirection * originalVelocities[obj].magnitude;
-            originalVelocities.Remove(obj);
-        }
+        Vector2 exitDirection = exitRotation * Vector3.right;  // Assuming portal 'right' is the forward direction
+        rb.velocity = exitDirection.normalized * rb.velocity.magnitude;  // Maintain speed, change direction
         obj.transform.position = position;
-        obj.SetActive(true);
     }
+}
 }

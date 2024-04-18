@@ -15,7 +15,7 @@ public class Portal : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // Only allow the blue portal to absorb objects
+        
         if (portalColor == "blue")
         {
             portalController.EnterPortal(other.gameObject, portalColor);
