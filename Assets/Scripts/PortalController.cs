@@ -14,12 +14,12 @@ public class PortalController : MonoBehaviour
     private Dictionary<GameObject, Vector2> originalVelocities = new Dictionary<GameObject, Vector2>();
     private Dictionary<GameObject, float> teleportCooldowns = new Dictionary<GameObject, float>();
     public float teleportCooldownDuration = 0.5f; // seconds
-    public CircleCollider2D allowedPlacementArea; 
+    public BoxCollider2D allowedPlacementArea; 
 
     void Start()
     {
         mainCamera = Camera.main;
-        allowedPlacementArea = GameObject.FindGameObjectWithTag("PortalArea").GetComponent<CircleCollider2D>();
+        allowedPlacementArea = GameObject.FindGameObjectWithTag("PortalArea").GetComponent<BoxCollider2D>();
         PlaceInitialPortals();
     }
 
