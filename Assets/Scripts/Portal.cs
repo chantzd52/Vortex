@@ -20,5 +20,10 @@ public class Portal : MonoBehaviour
         {
             portalController.EnterPortal(other.gameObject, portalColor);
         }
+
+        if (portalColor == "red")
+        {
+            portalController.EnterPortal(other.gameObject, portalColor);
+        }
     }
 }

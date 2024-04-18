@@ -11,154 +11,116 @@ public class PortalController : MonoBehaviour
     private Vector3 mousePosition;
     private Camera mainCamera;
 
-    private Queue<GameObject> queueForRed = new Queue<GameObject>();
     private Dictionary<GameObject, Vector2> originalVelocities = new Dictionary<GameObject, Vector2>();
-    private Dictionary<GameObject, float> cooldownTimes = new Dictionary<GameObject, float>();
-
-     public CircleCollider2D allowedPlacementArea; // Reference to the CircleCollider2D that defines where portals can be placed
-
-    public float cooldownDuration = 0f; // Cooldown to prevent immediate re-entry
-    public float ejectDelay = 1.0f; // Delay between ejecting objects from the red portal
+    private Dictionary<GameObject, float> teleportCooldowns = new Dictionary<GameObject, float>();
+public float teleportCooldownDuration = 1.0f; // seconds
+    public CircleCollider2D allowedPlacementArea; // Area where portals can be placed
 
     void Start()
     {
         mainCamera = Camera.main;
+        PlaceInitialPortals();
     }
 
     void Update()
     {
         HandlePortalPlacement();
-        TryReactivateObjects(redPortal, queueForRed);
+    }
+
+    private void PlaceInitialPortals()
+    {
+        bluePortal = Instantiate(bluePortalPrefab, new Vector3(-5, 0, 0), Quaternion.identity);
+        redPortal = Instantiate(redPortalPrefab, new Vector3(5, 0, 0), Quaternion.identity);
+        bluePortal.GetComponent<Portal>().SetPortalController(this, "blue");
+        redPortal.GetComponent<Portal>().SetPortalController(this, "red");
     }
 
     private void HandlePortalPlacement()
-{
-    mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-    mousePosition.z = 0;  // Adjust for 2D gameplay
+    {
+        mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0;
 
-    if (Input.GetMouseButtonDown(0) && IsWithinPlacementArea(mousePosition)) // Left mouse button for blue portal
-    {
-        TogglePortal(ref bluePortal, bluePortalPrefab, "blue");
-    }
-    if (Input.GetMouseButton(0) && bluePortal != null) // Left mouse button held down
-    {
-        // Update blue portal's orientation to face the mouse
-        Vector2 direction = mousePosition - bluePortal.transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        bluePortal.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-    }
-    if (Input.GetMouseButtonDown(1) && IsWithinPlacementArea(mousePosition)) // Right mouse button for red portal
-    {
-        TogglePortal(ref redPortal, redPortalPrefab, "red");
-    }
-    if (Input.GetMouseButton(1) && redPortal != null) // Right mouse button held down
-    {
-        // Update red portal's orientation to face the mouse
-        Vector2 direction = mousePosition - redPortal.transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        redPortal.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-    }
-}
-
-private bool IsWithinPlacementArea(Vector3 position)
-{
-    return allowedPlacementArea.OverlapPoint(position);  // Check if the position is within the allowed area
-}
-
-    private void TogglePortal(ref GameObject portal, GameObject portalPrefab, string color)
-    {
-        if (portal == null)
+        if (Input.GetMouseButtonDown(0) && IsWithinPlacementArea(mousePosition))
         {
-            portal = Instantiate(portalPrefab, mousePosition, Quaternion.identity);
-            portal.GetComponent<Portal>().SetPortalController(this, color);
+            SetPortalPosition(bluePortal, mousePosition);
         }
-        else
+        if (Input.GetMouseButton(0) && bluePortal != null)
         {
-            portal.SetActive(!portal.activeSelf);
-            if (portal.activeSelf)
-                portal.transform.position = mousePosition;
+            UpdatePortalOrientation(bluePortal);
+        }
+        if (Input.GetMouseButtonDown(1) && IsWithinPlacementArea(mousePosition))
+        {
+            SetPortalPosition(redPortal, mousePosition);
+        }
+        if (Input.GetMouseButton(1) && redPortal != null)
+        {
+            UpdatePortalOrientation(redPortal);
         }
     }
 
+    private void SetPortalPosition(GameObject portal, Vector3 position)
+    {
+        portal.transform.position = position;
+    }
+
+    private void UpdatePortalOrientation(GameObject portal)
+    {
+        Vector2 direction = mousePosition - portal.transform.position;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        portal.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+
+    private bool IsWithinPlacementArea(Vector3 position)
+    {
+        return allowedPlacementArea.OverlapPoint(position);
+    }
 
     public void EnterPortal(GameObject obj, string portalColor)
-    {
-
-        // Check if the object has the "Boundary" tag
-        if (obj.tag == "Boundary")
-            return;  // Do nothing if it's a boundary
-            
-        if (portalColor == "blue" && obj.tag == "Player")
-        {
-            if (redPortal != null && redPortal.activeSelf)
-            {
-                TeleportPlayer(obj, redPortal.transform.position);
-            }
-            else
-            {
-                GameOver(); // Red portal not active, game over
-            }
-        }
-        else if (portalColor == "blue" && obj.tag != "Player")
-        {
-            if (cooldownTimes.ContainsKey(obj) && Time.time < cooldownTimes[obj]) return;
-
-            Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
-            if (rb != null)
-            {
-                originalVelocities[obj] = rb.velocity; // Store original velocity
-            }
-
-            SetObjectInactive(obj);
-            queueForRed.Enqueue(obj);
-            cooldownTimes[obj] = Time.time + cooldownDuration;
-        }
-    }
-
-    private void TeleportPlayer(GameObject player, Vector3 exitPosition)
-    {
-        player.transform.position = exitPosition; // Teleport player to red portal position
-    }
-
-    private void GameOver()
-    {
-        Debug.Log("Game Over: Red portal not active!");
-        // Implement actual game over mechanics (UI display, scene reset, etc.)
-    }
-
-    private void TryReactivateObjects(GameObject portal, Queue<GameObject> queue)
-    {
-        if (portal != null && portal.activeSelf && queue.Count > 0)
-        {
-            GameObject obj = queue.Dequeue();
-            ReactivateObject(obj, portal.transform.position);
-        }
-    }
-
-    private void ReactivateObject(GameObject obj, Vector3 position)
 {
-    obj.SetActive(true);
-    obj.transform.position = position;
-    Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
-    if (rb != null && originalVelocities.ContainsKey(obj))
-    {
-        rb.isKinematic = false;
+    if (obj.tag == "Boundary") return; // Skip boundaries
 
-        // Apply the stored velocity magnitude in the direction the portal is facing
-        Vector2 exitDirection = redPortal.transform.right; // Assuming the portal's "forward" direction is along its local X-axis
-        rb.velocity = exitDirection * originalVelocities[obj].magnitude;
-        
-        originalVelocities.Remove(obj);
+    // Check if the object is on cooldown
+    if (teleportCooldowns.ContainsKey(obj) && teleportCooldowns[obj] > Time.time)
+    {
+        Debug.Log($"{obj.name} is on cooldown.");
+        return;
+    }
+
+    GameObject exitPortal = null;
+    Vector3 exitDirection = Vector3.right;
+
+    if (portalColor == "blue" && redPortal != null && redPortal.activeSelf)
+    {
+        exitPortal = redPortal;
+        exitDirection = redPortal.transform.right;
+    }
+    else if (portalColor == "red" && bluePortal != null && bluePortal.activeSelf)
+    {
+        exitPortal = bluePortal;
+        exitDirection = bluePortal.transform.right;
+    }
+
+    if (exitPortal != null)
+    {
+        Teleport(obj, exitPortal.transform.position, exitDirection);
+        // Update cooldown
+        teleportCooldowns[obj] = Time.time + teleportCooldownDuration;
+    }
+    else
+    {
+        Debug.Log("Game Over: Corresponding portal not active!");
     }
 }
 
-    private void SetObjectInactive(GameObject obj)
+    private void Teleport(GameObject obj, Vector3 position, Vector3 exitDirection)
     {
         Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
-        if (rb != null)
+        if (rb != null && originalVelocities.ContainsKey(obj))
         {
-            rb.isKinematic = true;
+            rb.velocity = exitDirection * originalVelocities[obj].magnitude;
+            originalVelocities.Remove(obj);
         }
-        obj.SetActive(false);
+        obj.transform.position = position;
+        obj.SetActive(true);
     }
 }
