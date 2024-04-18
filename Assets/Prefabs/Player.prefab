@@ -31,8 +31,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -191,6 +191,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bluePortalPrefab: {fileID: 2318222690110398993, guid: 489796f53dfc55a4bb4f403e603725e3, type: 3}
   redPortalPrefab: {fileID: 4192561162801377119, guid: 834f605e5d1f50c46b56e0e27612f640, type: 3}
+  teleportCooldownDuration: 1
   allowedPlacementArea: {fileID: 0}
-  cooldownDuration: 2
-  ejectDelay: 1
