@@ -7,6 +7,7 @@ public class EnemyHealth : MonoBehaviour
 {
     public int bulletShield = 0; // Shield for bullets
     public int laserShield = 0; // Shield for lasers
+    public int xpValue = 10; // XP that this enemy provides when defeated
 
     public event Action OnDeath; // Event to signal death of the enemy
 
@@ -31,6 +32,12 @@ public class EnemyHealth : MonoBehaviour
 
     void Die()
     {
+        Player player = FindObjectOfType<Player>(); // Find the player instance
+        if (player != null)
+        {
+            player.AddXP(xpValue); // Give XP to the player
+        }
+        Destroy(gameObject); // Destroy the enemy object
         OnDeath?.Invoke(); // Notify all subscribers that this enemy has died
         Destroy(gameObject); // Destroy this enemy object
     }

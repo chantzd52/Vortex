@@ -206,6 +206,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdf0e0112b25c24489368458ccb237f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletShield: 1
+  bulletShield: 0
   laserShield: 0
+  isInvincible: 0
+  invincibleDuration: 3
+  blinkRate: 0.1
   OntouchKillEnemy: 1
+  currentXP: 0
+  xpForNextLevel: 200
+  powerUpSelection: {fileID: 0}

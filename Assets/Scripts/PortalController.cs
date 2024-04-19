@@ -25,7 +25,11 @@ public class PortalController : MonoBehaviour
 
     void Update()
     {
-        HandlePortalPlacement();
+        if (!PowerUpSelection.IsUIActive) // Only handle input if UI is not active
+        {
+            HandlePortalPlacement();
+        }
+
     }
 
     private void PlaceInitialPortals()

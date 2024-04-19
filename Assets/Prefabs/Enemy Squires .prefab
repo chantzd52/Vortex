@@ -198,3 +198,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletShield: 0
   laserShield: 0
+  xpValue: 100
