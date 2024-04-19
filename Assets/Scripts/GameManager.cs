@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public Transform spawnPoint;
     public Button respawnButton;
     public EnemySpawner enemySpawner;
+    
 
     private GameObject currentPlayer;
 

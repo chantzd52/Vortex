@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1562208877052234432}
   - component: {fileID: 8384220829905729535}
   - component: {fileID: -3966137843938435620}
+  - component: {fileID: -7389915867924233150}
   m_Layer: 0
   m_Name: 'Enemy Squires '
   m_TagString: Enemy
@@ -183,3 +184,17 @@ MonoBehaviour:
   numberOfBursts: 2
   shootingRate: 3
   speed: 0.5
+--- !u!114 &-7389915867924233150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6392242013120767191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 635c603d52fa34049843fca9b7c7f96d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletShield: 0
+  laserShield: 0

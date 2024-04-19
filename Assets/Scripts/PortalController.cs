@@ -82,7 +82,7 @@ public class PortalController : MonoBehaviour
     // Check if the object is on cooldown to avoid immediate re-entry problems
     if (teleportCooldowns.ContainsKey(obj) && teleportCooldowns[obj] > Time.time)
     {
-        Debug.Log($"{obj.name} is on cooldown.");
+        
         return;
     }
 

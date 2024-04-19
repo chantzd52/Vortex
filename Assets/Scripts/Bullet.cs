@@ -40,14 +40,14 @@ public class Bullet : MonoBehaviour
         if (other.CompareTag("Enemy"))
         {
             TriggerHitEffects(other.transform.position);
-            Destroy(other.gameObject);
+            Destroy(gameObject);
         }
     }
 
     // Handle the explosion and destruction of the hit object
     private void TriggerHitEffects(Vector3 position)
     {
-        Debug.Log("Ship hit! Explosion and destruction logic here.");
+        
         if (explosionPrefab != null)
             Instantiate(explosionPrefab, position, Quaternion.identity);
 

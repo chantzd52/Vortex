@@ -206,6 +206,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdf0e0112b25c24489368458ccb237f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletShield: 0
+  bulletShield: 1
   laserShield: 0
   OntouchKillEnemy: 1
