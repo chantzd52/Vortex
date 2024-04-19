@@ -29,17 +29,11 @@ public class Bullet : MonoBehaviour
             return;
         }
 
-        // The bullet can always harm the player
+        // The bullet hits player and gets destroyed
         if (other.CompareTag("Player"))
         {
             TriggerHitEffects(other.transform.position);
-            Destroy(other.gameObject);
-            //Destroy object with tag portal
-            GameObject[] portals = GameObject.FindGameObjectsWithTag("Portal");
-            foreach (GameObject portal in portals)
-            {
-                Destroy(portal);
-            }
+            Destroy(gameObject);
         }
 
         // The bullet harms other enemies immediately

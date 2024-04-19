@@ -10,6 +10,7 @@ TagManager:
   - PortalArea
   - Portal
   - Bullet
+  - Laser
   layers:
   - Default
   - TransparentFX
