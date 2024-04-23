@@ -13,7 +13,7 @@ public class PortalController : MonoBehaviour
 
     private Dictionary<GameObject, Vector2> originalVelocities = new Dictionary<GameObject, Vector2>();
     private Dictionary<GameObject, float> teleportCooldowns = new Dictionary<GameObject, float>();
-    public float teleportCooldownDuration = 0.5f; // seconds
+    public float teleportCooldownDuration = 0.1f; // seconds
     public BoxCollider2D allowedPlacementArea; 
 
     void Start()
@@ -83,6 +83,10 @@ public class PortalController : MonoBehaviour
 {
     if (obj.tag == "Boundary") return; // Skip boundaries
 
+    if (obj.tag == "Portal") return; // Skip portals
+
+    if (obj.tag == "LaserEvent") return; // Skip laser events
+
     // Check if the object is on cooldown to avoid immediate re-entry problems
     if (teleportCooldowns.ContainsKey(obj) && teleportCooldowns[obj] > Time.time)
     {
@@ -110,10 +114,9 @@ public class PortalController : MonoBehaviour
         Teleport(obj, exitPortal.transform.position, exitDirection);
         teleportCooldowns[obj] = Time.time + teleportCooldownDuration;  // update cooldown
     }
-    else
-    {
-        Debug.Log("Game Over: Corresponding portal not active!");
-    }
+
+   
+
 }
 
    private void Teleport(GameObject obj, Vector3 position, Quaternion exitRotation)
@@ -123,9 +126,18 @@ public class PortalController : MonoBehaviour
     {
         // Assuming the exit direction is aligned with the portal's right vector
         Vector2 exitDirection = exitRotation * Vector2.right;
+
+        // Ensure there is a minimum speed
+        float minSpeed = 2f; // Define a suitable minimum speed
+        float currentSpeed = rb.velocity.magnitude;
         
+        // If the current speed is less than the minimum speed, set to minimum speed
+        if (currentSpeed < minSpeed) {
+            currentSpeed = minSpeed;
+        }
+
         // Set the new velocity in the direction the exit portal is facing
-        rb.velocity = exitDirection.normalized * rb.velocity.magnitude;
+        rb.velocity = exitDirection.normalized * currentSpeed;
 
         // Update the rotation to face along the direction of velocity
         // Calculate the angle from the velocity vector

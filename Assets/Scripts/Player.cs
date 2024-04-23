@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
 
     public delegate void LevelUpAction(); // Event to trigger when player levels up
     public event LevelUpAction OnLevelUp;
+    public AudioSource audioSource; // The AudioSource component
+    public AudioClip Powerup; // The powerup sound clip
 
     void Start()
     {
@@ -42,11 +44,11 @@ public class Player : MonoBehaviour
         {
             bulletShield--;
         }
-        else if (other.CompareTag("Laser") && laserShield > 0)
+        else if (other.CompareTag("Laser") && laserShield > 0 || other.CompareTag("LaserEvent") && laserShield > 0)
         {
             laserShield--;
         }
-        else if (other.CompareTag("Bullet") && bulletShield == 0 || other.CompareTag("Laser") && laserShield == 0)
+        else if (other.CompareTag("Bullet") && bulletShield == 0 || other.CompareTag("Laser") && laserShield == 0 || other.CompareTag("LaserEvent") && laserShield == 0)
         {
             PlayerDead();
         }
@@ -91,6 +93,7 @@ public class Player : MonoBehaviour
     {
         if (currentXP >= xpForNextLevel)
         {
+            audioSource.PlayOneShot(Powerup);  // Play the level up sound clip
             currentXP -= xpForNextLevel; // Reset XP or keep track of excess
             OnLevelUp?.Invoke(); // Trigger any level up events
             Debug.Log("Player leveled up!");  // Implement additional level up logic here, e.g., increase stats, show level up UI

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // Include this if you are manipulating UI elements directly
+using UnityEngine.UI; 
 
 public class GameManager : MonoBehaviour
 {
@@ -9,15 +9,18 @@ public class GameManager : MonoBehaviour
     public Transform spawnPoint;
     public Button respawnButton;
     public EnemySpawner enemySpawner;
+
+    public PowerUpSelection powerUpSelection;
     
 
     private GameObject currentPlayer;
 
     void Start()
     {
-        StartGame();
+        
         respawnButton.gameObject.SetActive(false);
         respawnButton.onClick.AddListener(RespawnPlayer);
+        
     }
 
     void Update()
@@ -32,13 +35,14 @@ public class GameManager : MonoBehaviour
             SpawnPlayer();
         }
         enemySpawner.ResetSpawner(); // Start or restart enemy spawning
+        powerUpSelection.HidePowerUpSelection();
     }
 
     void CheckPlayerStatus()
     {
         if (currentPlayer == null && !respawnButton.gameObject.activeInHierarchy)
         {
-            respawnButton.gameObject.SetActive(true);
+            PlayerDied();
         }
     }
 
@@ -60,12 +64,20 @@ public class GameManager : MonoBehaviour
         respawnButton.gameObject.SetActive(false);
     }
 
+        public void PlayerDied()
+    {
+        powerUpSelection.HidePowerUpSelection();
+        respawnButton.gameObject.SetActive(true);
+        // Handle other game over logic here
+    }
+
     public void RespawnPlayer()
     {
         if (currentPlayer == null)
         {
             SpawnPlayer();
             enemySpawner.ResetSpawner(); // Ensure enemy spawning continues
+            enemySpawner.ResetEvents(); // Reset events
         }
     }
 }
