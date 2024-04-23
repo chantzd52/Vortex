@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     private float blinkTimer; // Timer to control the blinking
     public bool OntouchKillEnemy = false; // Kill enemy on touch
     public int currentXP = 0; // Player's current XP
-    public int xpForNextLevel = 100; // XP needed for the next level
+    public int xpForNextLevel = 600; // XP needed for the next level
     public PowerUpSelection powerUpSelection;
      private SpriteRenderer spriteRenderer; // Reference to the SpriteRenderer component
 

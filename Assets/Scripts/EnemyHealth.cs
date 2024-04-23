@@ -30,7 +30,7 @@ public class EnemyHealth : MonoBehaviour
         }
     }
 
-    void Die()
+    public void Die()
     {
         Player player = FindObjectOfType<Player>(); // Find the player instance
         if (player != null)

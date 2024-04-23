@@ -121,8 +121,20 @@ public class PortalController : MonoBehaviour
     Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
     if (rb != null)
     {
-        Vector2 exitDirection = exitRotation * Vector3.right;  // Assuming portal 'right' is the forward direction
-        rb.velocity = exitDirection.normalized * rb.velocity.magnitude;  // Maintain speed, change direction
+        // Assuming the exit direction is aligned with the portal's right vector
+        Vector2 exitDirection = exitRotation * Vector2.right;
+        
+        // Set the new velocity in the direction the exit portal is facing
+        rb.velocity = exitDirection.normalized * rb.velocity.magnitude;
+
+        // Update the rotation to face along the direction of velocity
+        // Calculate the angle from the velocity vector
+        float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
+        
+        // Assuming the Drop Pod's forward direction is 'up' in sprite, subtract 90 degrees
+        obj.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
+
+        // Update the position to the exit portal's position
         obj.transform.position = position;
     }
 }
