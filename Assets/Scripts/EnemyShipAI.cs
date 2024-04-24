@@ -17,6 +17,7 @@ public class EnemyShipAI : MonoBehaviour
     private float lastShotTime;
     private int currentShotCount;
     private int currentBurstCount;
+    
 
     private enum State
     {

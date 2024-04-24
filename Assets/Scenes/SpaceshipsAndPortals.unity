@@ -2393,6 +2393,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 1510786427}
   respawnButton: {fileID: 740878855}
   enemySpawner: {fileID: 1897806465}
+  Blink: {fileID: 0}
   powerUpSelection: {fileID: 224796068}
 --- !u!4 &998154546
 Transform:
@@ -3590,13 +3591,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - levelEnemies:
-    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
-    - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
-    spawnInterval: 2
+    - {fileID: 6392242013120767191, guid: a4b3aa307c979f944af50c3b751761d8, type: 3}
+    spawnInterval: 4
     maxEnemies: 6
     waveDuration: 30
   - levelEnemies:
     - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
     spawnInterval: 2
     maxEnemies: 6
     waveDuration: 30
@@ -3612,11 +3613,11 @@ MonoBehaviour:
     waveDuration: 200
   events:
   - eventPrefab: {fileID: 644713033}
-    duration: 25
+    duration: 20
     isActive: 1
     targetTransform: {fileID: 0}
   - eventPrefab: {fileID: 1467473386}
-    duration: 25
+    duration: 20
     isActive: 1
     targetTransform: {fileID: 0}
   spawnPoints:

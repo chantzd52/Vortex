@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public Button respawnButton;
     public EnemySpawner enemySpawner;
 
+    public Blink Blink;
+
     public PowerUpSelection powerUpSelection;
     
 
@@ -62,6 +64,24 @@ public class GameManager : MonoBehaviour
         {
             Destroy(bullet);
         }
+        //clear lasers
+        GameObject[] lasers = GameObject.FindGameObjectsWithTag("Laser");
+        foreach (GameObject laser in lasers)
+        {
+            Destroy(laser);
+        }
+        //clear powerups
+        GameObject[] powerups = GameObject.FindGameObjectsWithTag("AddBulletShieldPowerUp");
+        foreach (GameObject powerup in powerups)
+        {
+            Destroy(powerup);
+        }
+        GameObject[] powerups2 = GameObject.FindGameObjectsWithTag("AddLazerShieldPowerUp");
+        foreach (GameObject powerup in powerups2)
+        {
+            Destroy(powerup);
+        }
+
         respawnButton.gameObject.SetActive(false);
     }
 

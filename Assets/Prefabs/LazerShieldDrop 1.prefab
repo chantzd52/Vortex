@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 2578342931582251983}
   - component: {fileID: 8590729834780271268}
   - component: {fileID: 49365910002200281}
-  - component: {fileID: -992004650871229368}
+  - component: {fileID: 7222441994803742902}
   m_Layer: 0
-  m_Name: Bullet
-  m_TagString: Bullet
+  m_Name: LazerShieldDrop 1
+  m_TagString: AddLazerShieldPowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.912, y: 1.6536, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8531457, z: 3.1262214}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,8 +76,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c1aaa9b2500b92a4e8a71b66259a8c33, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 945dc5f9d8f87de4e904472d9a1b72d0, type: 3}
+  m_Color: {r: 0.9622642, g: 0.3454076, b: 0.30411178, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -119,9 +119,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0059626997, y: -0.0005895171}
+  m_Offset: {x: 0.0015882751, y: -0.007550955}
   serializedVersion: 2
-  m_Radius: 0.10834818
+  m_Radius: 0.06500757
 --- !u!50 &49365910002200281
 Rigidbody2D:
   serializedVersion: 4
@@ -149,7 +149,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &-992004650871229368
+--- !u!114 &7222441994803742902
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,8 +158,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6865853227883485904}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbd081ee250eb52449046463fbf94d3c, type: 3}
+  m_Script: {fileID: 11500000, guid: 82a38ff90df60494b90c71a371dec297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2.5
-  explosionPrefab: {fileID: 0}
+  blinkTime: 0.1
+  blinkInterval: 0.5
+  timer: 8
+  secondaryColor: {r: 1, g: 0.32397673, b: 0.2688679, a: 1}
+  playerPrefab: {fileID: 0}

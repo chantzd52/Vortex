@@ -50,7 +50,18 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (isInvincible) return; // Skip all checks if invincible
+        if (isInvincible){
+            if (other.CompareTag("AddBulletShieldPowerUp"))
+            {
+                Destroy(other.gameObject); // Destroy the power-up object
+                AddBulletShield(); // Increase bullet shield count
+            }
+            else if (other.CompareTag("AddLazerShieldPowerUp"))
+            {
+                Destroy(other.gameObject); // Destroy the power-up object
+                AddLaserShield(); // Increase laser shield count
+        } return; // Skip all checks if invincible
+        }
 
         if (other.CompareTag("Bullet") && currentBulletShields > 0)
         {
@@ -65,6 +76,16 @@ public class Player : MonoBehaviour
         else if (other.CompareTag("Bullet") && currentBulletShields == 0 || other.CompareTag("Laser") && currentLaserShields == 0 || other.CompareTag("LaserEvent") && currentLaserShields == 0)
         {
             PlayerDead();
+        }
+        else if (other.CompareTag("AddBulletShieldPowerUp"))
+        {
+            Destroy(other.gameObject); // Destroy the power-up object
+            AddBulletShield(); // Increase bullet shield count
+        }
+        else if (other.CompareTag("AddLazerShieldPowerUp"))
+        {
+            Destroy(other.gameObject); // Destroy the power-up object
+            AddLaserShield(); // Increase laser shield count
         }
         else if (other.CompareTag("Enemy") && OntouchKillEnemy)
         {

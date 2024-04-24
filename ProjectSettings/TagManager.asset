@@ -12,6 +12,8 @@ TagManager:
   - Bullet
   - Laser
   - LaserEvent
+  - AddBulletShieldPowerUp
+  - AddLazerShieldPowerUp
   layers:
   - Default
   - TransparentFX
