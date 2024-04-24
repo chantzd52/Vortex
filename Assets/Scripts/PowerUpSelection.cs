@@ -6,134 +6,120 @@ using TMPro;
 
 public class PowerUpSelection : MonoBehaviour
 {
-    public GameObject powerUpUI; // Assign this in the inspector, should be your UI panel
-    public Button[] powerUpButtons; // Assign buttons for power-ups
-    public static bool IsUIActive = false; // Static variable to track UI state
+    [System.Serializable]
+    public class PowerUpDetails
+    {
+        public string name;
+        public Sprite image;
+        public string description;
+        public PowerUpType type;
+    }
 
-    private List<string> availablePowerUps = new List<string>() { "Shield", "Shield", "Shield" }; // List of all power-ups
+    public enum PowerUpType
+    {
+        GainShieldSlot,  // Increases max bullet shields
+        IncreaseMaxLaserShields,  // Increases max laser shields
+        IncreaseSpeed,  // Increases player speed
+        IncreaseTurnSpeed,  // Increases player turn speed
+        AddBulletShield  // Adds a bullet shield
+
+    }
+
+    [System.Serializable]
+    public class PowerUpSlot
+{
+    public Button button; // The button that also displays the power up image
+    public TextMeshProUGUI descriptionText; // Text for the power up's description
+}
+
+    public GameObject powerUpUI;
+    public PowerUpSlot[] powerUpSlots;
+    public static bool IsUIActive = false;
+    public List<PowerUpDetails> availablePowerUps;
 
     void Start()
     {
         HidePowerUpSelection();
-        ConfigureButtons(); // Configure buttons without assigning specific actions
     }
 
     public void ShowPowerUpSelection()
     {
         powerUpUI.SetActive(true);
-        IsUIActive = true; // Set the UI as active
-        Time.timeScale = 0; // Pause the game
+        IsUIActive = true;
+        Time.timeScale = 0;
         SetupRandomPowerUps();
     }
 
     private void SetupRandomPowerUps()
 {
-    List<string> chosenPowerUps = new List<string>();
+    List<PowerUpDetails> chosenPowerUps = new List<PowerUpDetails>();
 
-    if (powerUpButtons == null)
+    while (chosenPowerUps.Count < Mathf.Min(powerUpSlots.Length, availablePowerUps.Count))
     {
-        Debug.LogError("PowerUpButtons array is not assigned!");
-        return;
+        int randomIndex = Random.Range(0, availablePowerUps.Count);
+        if (!chosenPowerUps.Contains(availablePowerUps[randomIndex]))
+        {
+            chosenPowerUps.Add(availablePowerUps[randomIndex]);
+        }
     }
 
-    for (int i = 0; i < powerUpButtons.Length; i++)
+    for (int i = 0; i < powerUpSlots.Length; i++)
     {
-        if (powerUpButtons[i] == null)
+        if (i < chosenPowerUps.Count)
         {
-            Debug.LogError($"PowerUp button at index {i} is not assigned!");
-            continue;
-        }
+            PowerUpDetails powerUp = chosenPowerUps[i];
+            PowerUpSlot slot = powerUpSlots[i];
 
-        // Get the TextMeshPro component from the button's children
-        TextMeshProUGUI buttonText = powerUpButtons[i].GetComponentInChildren<TextMeshProUGUI>();
-        if (buttonText == null)
+            slot.descriptionText.text = powerUp.description;
+            Image buttonImage = slot.button.GetComponent<Image>(); // Get the Image component of the button
+            buttonImage.sprite = powerUp.image; // Set the sprite to the power up image
+            slot.button.onClick.RemoveAllListeners();
+            slot.button.onClick.AddListener(() => ApplyPowerUp(powerUp.type));
+            slot.button.interactable = true;
+        }
+        else
         {
-            Debug.LogError($"No TextMeshProUGUI component found for PowerUp button at index {i}!");
-            continue;
+            powerUpSlots[i].button.gameObject.SetActive(false);
         }
-
-        int randIndex = Random.Range(0, availablePowerUps.Count);
-        string powerUpType = availablePowerUps[randIndex];
-        chosenPowerUps.Add(powerUpType);
-
-        buttonText.text = powerUpType;  // Set the button text using TextMeshPro
-    }
-
-    if (chosenPowerUps.Count > 0)
-    {
-        ConfigureButtons(chosenPowerUps);
     }
 }
 
     public void HidePowerUpSelection()
     {
         powerUpUI.SetActive(false);
-        IsUIActive = false; // Set the UI as inactive
-        Time.timeScale = 1; // Resume the game
+        IsUIActive = false;
+        Time.timeScale = 1;
     }
 
-    // Setup buttons without specific actions
-   private void ConfigureButtons()
-{
-    if (powerUpButtons == null || powerUpButtons.Length == 0)
+    private void ApplyPowerUp(PowerUpType type)
     {
-        Debug.LogError("PowerUp buttons are not assigned in the inspector");
-        return;
-    }
-
-    foreach (Button button in powerUpButtons)
-    {
-        if (button != null)
+        Player player = FindObjectOfType<Player>();
+        if (player != null)
         {
-            Text buttonText = button.GetComponentInChildren<Text>();
-            if (buttonText != null)
+            switch (type)
             {
-                buttonText.text = "Select Power-Up";
+                case PowerUpType.GainShieldSlot:
+                    player.AddBulletShieldSlot();
+                    break;
+                case PowerUpType.IncreaseMaxLaserShields:
+                    player.AddLaserShieldSlot();
+                    break;
+                case PowerUpType.IncreaseSpeed:
+                    player.IncreaseSpeed();  
+                    break;
+                case PowerUpType.IncreaseTurnSpeed:
+                    player.IncreaseTurnSpeed();  
+                    break;
+                case PowerUpType.AddBulletShield:
+                    player.AddBulletShield();
+                    break;
             }
-            button.onClick.RemoveAllListeners();
-            button.interactable = false;  // Disable until options are available
+            HidePowerUpSelection();
+            player.BecomeInvincible();  // Make the player invincible after selecting a power up
         }
         else
         {
-            Debug.LogError("One of the buttons in the array is not assigned!");
+            Debug.LogError("Player object not found.");
         }
     }
-}
-
-    // Configure buttons with dynamically assigned power-ups
-    private void ConfigureButtons(List<string> chosenPowerUps)
-{
-    for (int i = 0; i < powerUpButtons.Length; i++)
-    {
-        if (i < chosenPowerUps.Count)  // Check if there's a power-up assigned for this button
-        {
-            int index = i;  // Local copy for lambda capture
-            powerUpButtons[i].interactable = true;  // Enable the button
-            powerUpButtons[i].onClick.RemoveAllListeners();
-            powerUpButtons[i].onClick.AddListener(() => SelectPowerUp(chosenPowerUps[index]));
-        }
-    }
-}
-
-    void SelectPowerUp(string powerUpType)
-{
-    Debug.Log($"Power Up Selected: {powerUpType}");
-    Player player = FindObjectOfType<Player>(); // Find the player object
-    if (player != null)
-    {
-        if (powerUpType == "Shield")
-        {
-            player.bulletShield++; // Increase shield
-            Debug.Log("Shield increased");
-        }
-        // Trigger invincibility regardless of the power-up type
-        player.BecomeInvincible();
-
-        HidePowerUpSelection(); // Hide UI and resume the game
-    }
-    else
-    {
-        Debug.LogError("Player object not found.");
-    }
-}
 }

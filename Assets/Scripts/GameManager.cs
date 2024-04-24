@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     private GameObject currentPlayer;
 
+
     void Start()
     {
         

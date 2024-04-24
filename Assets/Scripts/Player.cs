@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class Player : MonoBehaviour
 {
-    public int bulletShield = 0; // Shield for bullets
-    public int laserShield = 0; // Shield for lasers
+
+    public int maxBulletShieldSlots = 1; // Maximum slots for bullet shields
+    public int currentBulletShields = 0; // Current number of bullet shields
+    public int maxLaserShieldSlots = 1; // Maximum slots for laser shields
+    public int currentLaserShields = 0; // Current number of laser shields
     public bool isInvincible = false; // Flag to check if the player is invincible
     public float invincibleDuration = 3.0f; // Duration of invincibility in seconds
     private float invincibleTimer; // Timer to track invincibility duration
@@ -16,7 +20,9 @@ public class Player : MonoBehaviour
     public int currentXP = 0; // Player's current XP
     public int xpForNextLevel = 600; // XP needed for the next level
     public PowerUpSelection powerUpSelection;
-     private SpriteRenderer spriteRenderer; // Reference to the SpriteRenderer component
+    private SpriteRenderer spriteRenderer; // Reference to the SpriteRenderer component
+    private PlayerUIManager uiManager; // Reference to the PlayerUIManager component
+
 
     public delegate void LevelUpAction(); // Event to trigger when player levels up
     public event LevelUpAction OnLevelUp;
@@ -25,9 +31,13 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        uiManager = FindObjectOfType<PlayerUIManager>(); // Find the UI manager in the scene
+        UpdateUI(); // Update UI at start to initialize shield display correctly
         OnLevelUp += LevelUpHandler;
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
+
+       
 
      void OnDestroy()
     {
@@ -36,19 +46,23 @@ public class Player : MonoBehaviour
 
 
 
+
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (isInvincible) return; // Skip all checks if invincible
 
-        if (other.CompareTag("Bullet") && bulletShield > 0)
+        if (other.CompareTag("Bullet") && currentBulletShields > 0)
         {
-            bulletShield--;
+            currentBulletShields--;
+            UpdateUI();
         }
-        else if (other.CompareTag("Laser") && laserShield > 0 || other.CompareTag("LaserEvent") && laserShield > 0)
+        else if (other.CompareTag("Laser") && currentLaserShields > 0 || other.CompareTag("LaserEvent") && currentLaserShields > 0)
         {
-            laserShield--;
+            currentLaserShields--;
+            UpdateUI();
         }
-        else if (other.CompareTag("Bullet") && bulletShield == 0 || other.CompareTag("Laser") && laserShield == 0 || other.CompareTag("LaserEvent") && laserShield == 0)
+        else if (other.CompareTag("Bullet") && currentBulletShields == 0 || other.CompareTag("Laser") && currentLaserShields == 0 || other.CompareTag("LaserEvent") && currentLaserShields == 0)
         {
             PlayerDead();
         }
@@ -80,6 +94,102 @@ public class Player : MonoBehaviour
             Destroy(portal);
         }
     }
+
+        void Update()
+    {
+        
+        if (isInvincible)
+        {
+            invincibleTimer -= Time.deltaTime;
+            blinkTimer -= Time.deltaTime;
+
+            if (blinkTimer <= 0)
+            {
+                spriteRenderer.color = new Color(1f, 1f, 1f, spriteRenderer.color.a == 1.0f ? 0.5f : 1.0f);
+                blinkTimer = blinkRate;
+            }
+
+            if (invincibleTimer <= 0)
+            {
+                isInvincible = false;
+                spriteRenderer.color = new Color(1f, 1f, 1f, 1.0f); // Reset the sprite color to fully opaque
+            }
+        }
+    }
+
+    public void AddBulletShieldSlot()
+    {
+         if (maxBulletShieldSlots < 4) // Ensure we do not exceed four slots
+        {
+            maxBulletShieldSlots++;
+            UpdateUI();
+           
+        }
+    }
+
+    public void AddLaserShieldSlot()
+    {
+        if(maxLaserShieldSlots < 4) // Ensure we do not exceed four slots
+        {
+            maxLaserShieldSlots++;
+            UpdateUI();
+        }
+    }
+
+   
+
+    public void AddBulletShield()
+    {
+        if (currentBulletShields < maxBulletShieldSlots)
+        {
+            currentBulletShields++;
+            UpdateUI();
+        }
+    }
+
+    public void AddLaserShield()
+    {
+        if (currentLaserShields < maxLaserShieldSlots)
+        {
+            currentLaserShields++;
+            UpdateUI();
+        }
+    }
+
+    public void IncreaseBulletShield()
+{
+    AddBulletShield(); // Increase bullet shield count
+    UpdateUI();
+    Debug.Log("Bullet shield increased to: " + currentBulletShields);
+}
+
+public void IncreaseLaserShield()
+{
+    currentLaserShields++;  // Increase laser shield count
+    UpdateUI();
+    Debug.Log("Laser shield increased to: " + currentLaserShields);
+}
+
+private void UpdateUI()
+{
+    if (uiManager != null)
+    {
+        uiManager.UpdateBulletShieldIcons(currentBulletShields, maxBulletShieldSlots);
+        uiManager.UpdateLaserShieldIcons(currentLaserShields, maxLaserShieldSlots);
+    }
+}
+
+public void IncreaseSpeed()
+{
+    // Assuming you have a speed property
+    // Increase player's movement speed
+}
+
+public void IncreaseTurnSpeed()
+{
+    // Assuming you have a turn speed property
+    // Increase player's turning speed
+}
 
     // Call this method to add XP to the player
     public void AddXP(int xpAmount)
@@ -117,27 +227,6 @@ public class Player : MonoBehaviour
          blinkTimer = blinkRate; // Reset the blink timer
     }
 
-    void Update()
-        {
-        if (isInvincible)
-        {
-            invincibleTimer -= Time.deltaTime;
-            blinkTimer -= Time.deltaTime;
-
-            if (blinkTimer <= 0)
-            {
-                spriteRenderer.color = new Color(1f, 1f, 1f, spriteRenderer.color.a == 1.0f ? 0.5f : 1.0f);
-                blinkTimer = blinkRate;
-            }
-
-            if (invincibleTimer <= 0)
-            {
-                isInvincible = false;
-                spriteRenderer.color = new Color(1f, 1f, 1f, 1.0f); // Reset the sprite color to fully opaque
-            }
-        }
-        
-    }
 
 }
 
