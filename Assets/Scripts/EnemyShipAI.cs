@@ -13,11 +13,20 @@ public class EnemyShipAI : MonoBehaviour
     public int numberOfBursts = 2;
     public float shootingRate = 1f;
     public float speed = 5f;
+    public int spreadCount = 5; // Number of bullets in a shotgun spread
+    public float spreadAngle = 45f; // Angle of the spread
+    public bool useSpreadShot = false;
 
     private float lastShotTime;
     private int currentShotCount;
     private int currentBurstCount;
-    
+    public bool enableLooping = true;  // Enable or disable looping from the editor
+    public float loopInterval = 5f;   // Time between loops
+    public float loopDuration = 5f;   // Duration of each loop
+
+    private float loopTimer = 0f;
+    private bool isLooping = false;
+    private float currentLoopTime = 0f;
 
     private enum State
     {
@@ -28,9 +37,8 @@ public class EnemyShipAI : MonoBehaviour
 
     private State currentState = State.Approaching;
 
-    void Start()
+        void Start()
     {
-        // Find the player by tag and set it as the target
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
         if (playerObject != null)
         {
@@ -40,26 +48,61 @@ public class EnemyShipAI : MonoBehaviour
 
     void Update()
     {
-        if (player == null)
+        if (player == null) return; // Skip update if no player
+
+        HandleLooping();
+        HandleMovementAndShooting();
+    }
+
+    void HandleLooping()
+    {
+        if (!enableLooping) return;
+
+        if (isLooping)
         {
-            return; // If player is not found, do nothing
+            if (currentLoopTime < loopDuration)
+            {
+                // Continue looping
+                PerformLoop();
+                currentLoopTime += Time.deltaTime;
+            }
+            else
+            {
+                // End loop
+                isLooping = false;
+                currentLoopTime = 0;
+            }
         }
+        else
+        {
+            loopTimer += Time.deltaTime;
+            if (loopTimer >= loopInterval)
+            {
+                // Start looping
+                isLooping = true;
+                loopTimer = 0;
+            }
+        }
+    }
+
+    void PerformLoop()
+    {
+        // Simulate a looping maneuver, such as a circular motion
+        transform.RotateAround(player.position, Vector3.forward, 360 * Time.deltaTime / loopDuration);
+    }
+
+    void HandleMovementAndShooting()
+    {
+        if (isLooping) return; // Do not handle other actions when looping
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-        // Always look at the player
         LookAtPlayer();
 
-        // Handle movement and shooting based on distance to the player
         if (distanceToPlayer > approachDistance)
         {
             MoveTowards(player.position);
         }
-        else if (distanceToPlayer > retreatDistance)
-        {
-            MoveTowards(player.position);
-        }
-        else
+        else if (distanceToPlayer <= retreatDistance)
         {
             MoveAwayFrom(player.position);
         }
@@ -70,7 +113,7 @@ public class EnemyShipAI : MonoBehaviour
         }
     }
 
-    private void Shoot()
+    void Shoot()
     {
         if (Time.time > lastShotTime + 1f / shootingRate && currentShotCount < shotsPerBurst)
         {
@@ -85,40 +128,33 @@ public class EnemyShipAI : MonoBehaviour
             currentBurstCount++;
             if (currentBurstCount >= numberOfBursts)
             {
-                currentState = State.Retreating;
-                currentBurstCount = 0;
+                currentBurstCount = 0; // Optionally change state here
             }
         }
     }
 
-    private void AimAndShoot()
+    void AimAndShoot()
     {
-        Vector3 directionToPlayer = (player.position - transform.position).normalized;
-        Quaternion rotation = Quaternion.Euler(0, 0, Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg - 90);
-
-        GameObject bullet = Instantiate(bulletPrefab, transform.position + directionToPlayer, rotation);
+        Quaternion rotation = Quaternion.Euler(0, 0, transform.eulerAngles.z);
+        GameObject bullet = Instantiate(bulletPrefab, transform.position + transform.up * 0.5f, rotation);
         bullet.GetComponent<Bullet>().SetShooter(gameObject);
     }
 
-    private void MoveTowards(Vector3 target)
+    void LookAtPlayer()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-        LookAtPlayer();
+        Vector3 directionToPlayer = player.position - transform.position;
+        float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg - 90;
+        transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
-    private void MoveAwayFrom(Vector3 target)
+    void MoveTowards(Vector3 target)
+    {
+        transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+    }
+
+    void MoveAwayFrom(Vector3 target)
     {
         Vector3 directionAwayFromPlayer = transform.position - target;
         transform.position += directionAwayFromPlayer.normalized * speed * Time.deltaTime;
-        LookAtPlayer();
-    }
-
-    private void LookAtPlayer()
-    {
-        if (player == null) return; // Ensure player is valid before calculating the angle
-
-        Vector3 directionToPlayer = player.position - transform.position;
-        float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg - 90f;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 }

@@ -211,6 +211,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletShield: 0
   laserShield: 0
-  xpValue: 10
+  xpValue: 25
   dropItems: []
   dropChance: 0.25

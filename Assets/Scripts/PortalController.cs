@@ -105,11 +105,14 @@ public class PortalController : MonoBehaviour
             {
                 
                 obj.GetComponent<EnemyHealth>().Die();
+                Debug.Log("blendered");
+                Debug.Log(blenderOdds);
                 
             }
             else
             {
                 Teleport(obj, exitPortal.transform.position, exitPortal.transform.rotation);
+                Debug.Log(blenderOdds);
             }
             teleportCooldowns[obj] = Time.time + teleportCooldownDuration; // update cooldown
         }

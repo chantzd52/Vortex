@@ -33,7 +33,7 @@ public class EnemySpawner : MonoBehaviour
     private int enemiesSpawned = 0;
     private List<GameObject> activeEnemies = new List<GameObject>();
 
-    public float eventInterval = 120f;  // Time in seconds between each event
+    public float eventInterval = 30f;  // Time in seconds between each event
     private float eventTimer;
 
     void Start()

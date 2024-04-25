@@ -297,6 +297,7 @@ public void increaseBlender()
             audioSource.PlayOneShot(Powerup);  // Play the level up sound clip
             currentXP -= xpForNextLevel; // Reset XP or keep track of excess
             OnLevelUp?.Invoke(); // Trigger any level up events
+            xpForNextLevel += 200; // Increase the XP needed for the next level
             Debug.Log("Player leveled up!");  // Implement additional level up logic here, e.g., increase stats, show level up UI
             
         }

@@ -41,7 +41,6 @@ public class PowerUpSelection : MonoBehaviour
     public PowerUpSlot[] powerUpSlots;
     public static bool IsUIActive = false;
     public List<PowerUpDetails> availablePowerUps;
-    public SpaceshipController SpaceshipController;
 
     void Start()
     {
@@ -111,6 +110,7 @@ public class PowerUpSelection : MonoBehaviour
     private void ApplyPowerUp(PowerUpDetails powerUp)
     {
         Player player = FindObjectOfType<Player>();
+        
         if (player != null)
         {
             switch (powerUp.type)
@@ -138,6 +138,12 @@ public class PowerUpSelection : MonoBehaviour
                     break;
                 case PowerUpType.ShipSize:
                     player.DecreaseShipSize();
+                    break;
+                case PowerUpType.Blender:
+                    foreach (var portalController in FindObjectsOfType<PortalController>())
+                    {
+                        portalController.IncreaseBlender();
+                    }
                     break;
             }
             powerUp.selectionCount++;

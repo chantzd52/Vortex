@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -3966137843938435620}
   - component: {fileID: -7389915867924233150}
   m_Layer: 0
-  m_Name: Enemy Squires  1
+  m_Name: LazerLV.1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -110,10 +110,10 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!60 &8384220829905729535
 PolygonCollider2D:
@@ -144,7 +144,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -195,12 +195,18 @@ MonoBehaviour:
   player: {fileID: 254483009701040382, guid: cc651bd43c80e4346b027de074698f47, type: 3}
   bulletPrefab: {fileID: 6865853227883485904, guid: eafc5a71b5d625545ba04fcff87c3935, type: 3}
   approachDistance: 2
-  retreatDistance: 3
+  retreatDistance: 1
   shootingDistance: 8
   shotsPerBurst: 1
   numberOfBursts: 1
   shootingRate: 0.2
   speed: 0.5
+  spreadCount: 1
+  spreadAngle: 0
+  useSpreadShot: 0
+  enableLooping: 0
+  loopInterval: 5
+  loopDuration: 2
 --- !u!114 &-7389915867924233150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,7 +221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletShield: 0
   laserShield: 0
-  xpValue: 20
+  xpValue: 50
   dropItems:
   - item: {fileID: 6865853227883485904, guid: 142a792479b652e43acd594ae17d84cd, type: 3}
   - item: {fileID: 6865853227883485904, guid: 5bb2253ad65b2d74985df9b3b45ec893, type: 3}

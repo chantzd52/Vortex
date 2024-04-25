@@ -1042,7 +1042,6 @@ MonoBehaviour:
     type: 5
     selectionCount: 0
     maxSelections: 150
-  SpaceshipController: {fileID: 0}
 --- !u!114 &224796069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1257,7 +1256,7 @@ GameObject:
   - component: {fileID: 283588132}
   - component: {fileID: 283588131}
   - component: {fileID: 283588130}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square (4)
   m_TagString: Boundary
   m_Icon: {fileID: 0}
@@ -1521,7 +1520,7 @@ GameObject:
   - component: {fileID: 319763240}
   - component: {fileID: 319763239}
   - component: {fileID: 319763238}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square (3)
   m_TagString: Boundary
   m_Icon: {fileID: 0}
@@ -1758,7 +1757,7 @@ GameObject:
   - component: {fileID: 526603287}
   - component: {fileID: 526603286}
   - component: {fileID: 526603285}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square (2)
   m_TagString: Boundary
   m_Icon: {fileID: 0}
@@ -3631,43 +3630,50 @@ MonoBehaviour:
   waves:
   - levelEnemies:
     - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
+    spawnInterval: 5
+    maxEnemies: 6
+    waveDuration: 60
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: a4b3aa307c979f944af50c3b751761d8, type: 3}
     spawnInterval: 4
     maxEnemies: 6
-    waveDuration: 30
+    waveDuration: 60
   - levelEnemies:
     - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
+    - {fileID: 6392242013120767191, guid: a4b3aa307c979f944af50c3b751761d8, type: 3}
     - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
-    spawnInterval: 2
-    maxEnemies: 6
-    waveDuration: 30
+    spawnInterval: 4
+    maxEnemies: 8
+    waveDuration: 70
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    - {fileID: 6392242013120767191, guid: a4b3aa307c979f944af50c3b751761d8, type: 3}
+    - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
+    spawnInterval: 4
+    maxEnemies: 8
+    waveDuration: 130
   - levelEnemies:
     - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
-    spawnInterval: 2
+    - {fileID: 6392242013120767191, guid: a4b3aa307c979f944af50c3b751761d8, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    spawnInterval: 3
     maxEnemies: 12
     waveDuration: 130
   - levelEnemies:
     - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
-    spawnInterval: 2
-    maxEnemies: 12
-    waveDuration: 130
-  - levelEnemies:
-    - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
-    spawnInterval: 2
-    maxEnemies: 12
-    waveDuration: 130
-  - levelEnemies:
-    - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
+    - {fileID: 6392242013120767191, guid: a4b3aa307c979f944af50c3b751761d8, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
     spawnInterval: 2
     maxEnemies: 12
     waveDuration: 130
   events:
   - eventPrefab: {fileID: 644713033}
     duration: 20
-    isActive: 1
+    isActive: 0
     targetTransform: {fileID: 0}
   - eventPrefab: {fileID: 1467473386}
     duration: 20
-    isActive: 1
+    isActive: 0
     targetTransform: {fileID: 0}
   spawnPoints:
   - {fileID: 1034602089}
@@ -3919,7 +3925,7 @@ GameObject:
   - component: {fileID: 2140951516}
   - component: {fileID: 2140951515}
   - component: {fileID: 2140951514}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square (1)
   m_TagString: Boundary
   m_Icon: {fileID: 0}
