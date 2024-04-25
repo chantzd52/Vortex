@@ -163,6 +163,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blinkTime: 0.1
   blinkInterval: 0.5
-  timer: 8
+  timer: 25
   secondaryColor: {r: 1, g: 0.32397673, b: 0.2688679, a: 1}
   playerPrefab: {fileID: 0}

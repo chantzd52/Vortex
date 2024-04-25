@@ -190,9 +190,9 @@ MonoBehaviour:
   approachDistance: 2
   retreatDistance: 3
   shootingDistance: 8
-  shotsPerBurst: 1
-  numberOfBursts: 1
-  shootingRate: 0.2
+  shotsPerBurst: 5
+  numberOfBursts: 5
+  shootingRate: 0.5
   speed: 0.5
 --- !u!114 &-7389915867924233150
 MonoBehaviour:

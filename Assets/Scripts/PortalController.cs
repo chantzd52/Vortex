@@ -13,8 +13,10 @@ public class PortalController : MonoBehaviour
 
     private Dictionary<GameObject, Vector2> originalVelocities = new Dictionary<GameObject, Vector2>();
     private Dictionary<GameObject, float> teleportCooldowns = new Dictionary<GameObject, float>();
-    public float teleportCooldownDuration = 0.1f; // seconds
-    public BoxCollider2D allowedPlacementArea; 
+    public float teleportCooldownDuration = 0.05f; // seconds
+    public BoxCollider2D allowedPlacementArea;
+
+    public float blenderOdds = 0f; // Percentage chance to kill the object instead of teleporting
 
     void Start()
     {
@@ -94,32 +96,31 @@ public class PortalController : MonoBehaviour
         return;
     }
 
-    GameObject exitPortal = null;
-    Quaternion exitDirection = Quaternion.identity;
+    GameObject exitPortal = portalColor == "blue" && redPortal ? redPortal : bluePortal;
 
-    if (portalColor == "blue" && redPortal != null && redPortal.activeSelf)
-    {
-        exitPortal = redPortal;
-        exitDirection = redPortal.transform.rotation;
+        if (exitPortal)
+        {
+            // Randomly decide based on blender odds whether to destroy or teleport
+            if (Random.value < blenderOdds / 100.0f && obj.tag == "Enemy")
+            {
+                
+                obj.GetComponent<EnemyHealth>().Die();
+                
+            }
+            else
+            {
+                Teleport(obj, exitPortal.transform.position, exitPortal.transform.rotation);
+            }
+            teleportCooldowns[obj] = Time.time + teleportCooldownDuration; // update cooldown
+        }
     }
-    else if (portalColor == "red" && bluePortal != null && bluePortal.activeSelf)
-    {
-        exitPortal = bluePortal;
-        exitDirection = bluePortal.transform.rotation;
-    }
-
-    if (exitPortal != null)
-    {
-        // Immediately teleport without deactivating
-        Teleport(obj, exitPortal.transform.position, exitDirection);
-        teleportCooldowns[obj] = Time.time + teleportCooldownDuration;  // update cooldown
-    }
-
    
-
+public void IncreaseBlender() {
+    blenderOdds += 20f;
+    
 }
 
-   private void Teleport(GameObject obj, Vector3 position, Quaternion exitRotation)
+   private void Teleport(GameObject obj, Vector3 position, Quaternion exitRotation) 
 {
     Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
     if (rb != null)

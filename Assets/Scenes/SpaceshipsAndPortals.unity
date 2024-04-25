@@ -157,7 +157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 553.8, y: -261.2}
+  m_AnchoredPosition: {x: 573.7, y: -272.7}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5443440
@@ -270,7 +270,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 472.3, y: -260.6}
+  m_AnchoredPosition: {x: 492.2, y: -272.1}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &21105460
@@ -988,22 +988,61 @@ MonoBehaviour:
   - button: {fileID: 1596595987}
     descriptionText: {fileID: 1881268383}
   availablePowerUps:
-  - name: Shield
+  - name: General Shield Slot
     image: {fileID: 21300000, guid: a060ca7e4d8e8fe42a662402d4369be9, type: 3}
-    description: This adds a slot to your shield slot
+    description: Increase your General shield slot
     type: 0
-  - name: Increase Speed
-    image: {fileID: 21300000, guid: dfb59f263c6439147ac8e05c416a65b0, type: 3}
-    description: Increase your speed by 10%
-    type: 0
+    selectionCount: 0
+    maxSelections: 3
+  - name: Lazer Shield Slot
+    image: {fileID: 21300000, guid: 945dc5f9d8f87de4e904472d9a1b72d0, type: 3}
+    description: Increase your Lazer Shield slots
+    type: 1
+    selectionCount: 0
+    maxSelections: 3
   - name: PortalSize
     image: {fileID: 21300000, guid: 056fcf80cd9a8494cb1fd93f83f78e8f, type: 3}
-    description: This is a test for portal
-    type: 1
+    description: Increase the size of your portals
+    type: 6
+    selectionCount: 0
+    maxSelections: 3
+  - name: Increase Speed
+    image: {fileID: 21300000, guid: dfb59f263c6439147ac8e05c416a65b0, type: 3}
+    description: Increase the speed of your ship
+    type: 2
+    selectionCount: 0
+    maxSelections: 3
+  - name: Increase Turn Speed
+    image: {fileID: 21300000, guid: d307f2e84b48c2248ae06422c15e078c, type: 3}
+    description: Increase turn speed
+    type: 3
+    selectionCount: 0
+    maxSelections: 3
+  - name: Blender
+    image: {fileID: 21300000, guid: bbd6e19bd153e0f4192868ba1c376a44, type: 3}
+    description: Increase odds of portals killing by 20%
+    type: 8
+    selectionCount: 0
+    maxSelections: 3
   - name: Shrink Ship
     image: {fileID: 21300000, guid: d2eb843c7eba23b46bcb710b7de4ab36, type: 3}
-    description: it get small
-    type: 1
+    description: Make Your ship smaller
+    type: 7
+    selectionCount: 0
+    maxSelections: 3
+  - name: Shield Power up
+    image: {fileID: 21300000, guid: a060ca7e4d8e8fe42a662402d4369be9, type: 3}
+    description: Fill in an empty General shield slot
+    type: 4
+    selectionCount: 0
+    maxSelections: 150
+  - name: Lazer Shield Power up
+    image: {fileID: 21300000, guid: 945dc5f9d8f87de4e904472d9a1b72d0, type: 3}
+    description: Fill in an empty lazer shield slot
+    type: 5
+    selectionCount: 0
+    maxSelections: 150
+  SpaceshipController: {fileID: 0}
 --- !u!114 &224796069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1946,7 +1985,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 431.2, y: -299.9}
+  m_AnchoredPosition: {x: 451.1, y: -311.4}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &740878853
@@ -2276,7 +2315,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 471.9, y: -299.9}
+  m_AnchoredPosition: {x: 491.80002, y: -311.4}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &937076159
@@ -2582,7 +2621,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 431, y: -260.5}
+  m_AnchoredPosition: {x: 450.90002, y: -272}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1341055048
@@ -2657,7 +2696,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 554.3, y: -301.2}
+  m_AnchoredPosition: {x: 574.2, y: -312.7}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1425320013
@@ -3214,7 +3253,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 513.5, y: -261}
+  m_AnchoredPosition: {x: 533.4, y: -272.5}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1800274989
@@ -3423,7 +3462,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 513.4, y: -300.8}
+  m_AnchoredPosition: {x: 533.30005, y: -312.3}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1881268382
@@ -3591,7 +3630,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waves:
   - levelEnemies:
-    - {fileID: 6392242013120767191, guid: a4b3aa307c979f944af50c3b751761d8, type: 3}
+    - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
     spawnInterval: 4
     maxEnemies: 6
     waveDuration: 30
@@ -3609,8 +3648,18 @@ MonoBehaviour:
   - levelEnemies:
     - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
     spawnInterval: 2
-    maxEnemies: 24
-    waveDuration: 200
+    maxEnemies: 12
+    waveDuration: 130
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
+    spawnInterval: 2
+    maxEnemies: 12
+    waveDuration: 130
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
+    spawnInterval: 2
+    maxEnemies: 12
+    waveDuration: 130
   events:
   - eventPrefab: {fileID: 644713033}
     duration: 20
@@ -3803,7 +3852,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: e81740b81c6e3844aa0d4e557b168f42, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.42745098}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.19215687}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

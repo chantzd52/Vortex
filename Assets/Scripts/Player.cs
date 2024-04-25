@@ -23,11 +23,64 @@ public class Player : MonoBehaviour
     private SpriteRenderer spriteRenderer; // Reference to the SpriteRenderer component
     private PlayerUIManager uiManager; // Reference to the PlayerUIManager component
 
+    public SpaceshipController spaceShipController;  // get access to SpaceShipController
+
+    public PortalController portalController;  // get access to PortalController
+
 
     public delegate void LevelUpAction(); // Event to trigger when player levels up
     public event LevelUpAction OnLevelUp;
     public AudioSource audioSource; // The AudioSource component
     public AudioClip Powerup; // The powerup sound clip
+
+    public float thrustPower = 5f;
+    public float rotationSpeed = 200f;
+
+    private Rigidbody2D rb;
+
+    private void ThrustForward()
+    {
+        if (Input.GetKey(KeyCode.W))
+        {
+            // Apply a forward force to the Rigidbody in the direction it's facing
+            rb.AddForce(transform.up * thrustPower);
+        }
+    }
+
+    private void Rotate()
+    {
+        if (Input.GetKey(KeyCode.A))
+        {
+            // Rotate counterclockwise
+            rb.angularVelocity = rotationSpeed;
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            // Rotate clockwise
+            rb.angularVelocity = -rotationSpeed;
+        }
+        else
+        {
+            // No rotation input, stop rotating
+            rb.angularVelocity = 0;
+        }
+    }
+
+    public void IncreaseThrustPower()
+    {
+        thrustPower += 2;
+    }
+
+    public void IncreaseTurnSpeed()
+    {
+        rotationSpeed += 20;
+    }
+
+    public void DecreaseShipSize()
+    {
+        //Make th eplayer object scale -1
+        transform.localScale -= new Vector3(1, 1, 1);
+    }
 
     void Start()
     {
@@ -35,6 +88,7 @@ public class Player : MonoBehaviour
         UpdateUI(); // Update UI at start to initialize shield display correctly
         OnLevelUp += LevelUpHandler;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
        
@@ -116,6 +170,12 @@ public class Player : MonoBehaviour
         }
     }
 
+    void FixedUpdate()
+    {
+        ThrustForward();
+        Rotate();
+    }
+
         void Update()
     {
         
@@ -191,6 +251,17 @@ public void IncreaseLaserShield()
     Debug.Log("Laser shield increased to: " + currentLaserShields);
 }
 
+public void IncreasePortalSize()
+{
+    // Find the objects taged portal and increase Scale by 1
+    foreach (var portal in GameObject.FindGameObjectsWithTag("Portal"))
+    {
+        portal.transform.localScale += new Vector3(1, 1, 1);
+    }
+
+    Debug.Log("Portal size increased!");
+}
+
 private void UpdateUI()
 {
     if (uiManager != null)
@@ -200,17 +271,16 @@ private void UpdateUI()
     }
 }
 
-public void IncreaseSpeed()
+
+
+
+
+
+public void increaseBlender()
 {
-    // Assuming you have a speed property
-    // Increase player's movement speed
+    portalController.IncreaseBlender();  //use portal controller to increase blender
 }
 
-public void IncreaseTurnSpeed()
-{
-    // Assuming you have a turn speed property
-    // Increase player's turning speed
-}
 
     // Call this method to add XP to the player
     public void AddXP(int xpAmount)

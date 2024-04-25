@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -7389915867924233150}
   - component: {fileID: 3738151030088098464}
   - component: {fileID: 3496317182997475407}
+  - component: {fileID: 1378278425934310857}
   m_Layer: 0
   m_Name: DropPod
   m_TagString: Enemy
@@ -130,6 +131,8 @@ MonoBehaviour:
   bulletShield: 0
   laserShield: 0
   xpValue: 2
+  dropItems: []
+  dropChance: 0.25
 --- !u!61 &3738151030088098464
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -194,3 +197,20 @@ MonoBehaviour:
   flashDuration: 2
   spriteRenderer: {fileID: 136541747399940489}
   spawnInvulnerabilityDuration: 2
+--- !u!114 &1378278425934310857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6392242013120767191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 635c603d52fa34049843fca9b7c7f96d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletShield: 0
+  laserShield: 0
+  xpValue: 10
+  dropItems: []
+  dropChance: 0.25

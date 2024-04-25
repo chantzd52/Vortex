@@ -13,6 +13,8 @@ public class PowerUpSelection : MonoBehaviour
         public Sprite image;
         public string description;
         public PowerUpType type;
+        public int selectionCount = 0;  // Track the number of times selected
+        public int maxSelections = 3;   // Maximum number of times it can be selected
     }
 
     public enum PowerUpType
@@ -21,8 +23,11 @@ public class PowerUpSelection : MonoBehaviour
         IncreaseMaxLaserShields,  // Increases max laser shields
         IncreaseSpeed,  // Increases player speed
         IncreaseTurnSpeed,  // Increases player turn speed
-        AddBulletShield  // Adds a bullet shield
-
+        AddBulletShield, // Adds a bullet shield
+        AddLaserShield, // Adds a laser shield
+        Portalsize, // Increases the size of the portal
+        ShipSize, // Increases the size of the ship
+        Blender, // Blends the ship
     }
 
     [System.Serializable]
@@ -36,6 +41,7 @@ public class PowerUpSelection : MonoBehaviour
     public PowerUpSlot[] powerUpSlots;
     public static bool IsUIActive = false;
     public List<PowerUpDetails> availablePowerUps;
+    public SpaceshipController SpaceshipController;
 
     void Start()
     {
@@ -50,17 +56,20 @@ public class PowerUpSelection : MonoBehaviour
         SetupRandomPowerUps();
     }
 
-    private void SetupRandomPowerUps()
+   private void SetupRandomPowerUps()
 {
+    List<PowerUpDetails> filterAvailablePowerUps = availablePowerUps.FindAll(p =>
+        (p.selectionCount < p.maxSelections) ||
+        p.type == PowerUpType.AddBulletShield ||
+        p.type == PowerUpType.AddLaserShield);
+
     List<PowerUpDetails> chosenPowerUps = new List<PowerUpDetails>();
 
-    while (chosenPowerUps.Count < Mathf.Min(powerUpSlots.Length, availablePowerUps.Count))
+    while (chosenPowerUps.Count < Mathf.Min(powerUpSlots.Length, filterAvailablePowerUps.Count))
     {
-        int randomIndex = Random.Range(0, availablePowerUps.Count);
-        if (!chosenPowerUps.Contains(availablePowerUps[randomIndex]))
-        {
-            chosenPowerUps.Add(availablePowerUps[randomIndex]);
-        }
+        int randomIndex = Random.Range(0, filterAvailablePowerUps.Count);
+        if (!chosenPowerUps.Contains(filterAvailablePowerUps[randomIndex]))
+            chosenPowerUps.Add(filterAvailablePowerUps[randomIndex]);
     }
 
     for (int i = 0; i < powerUpSlots.Length; i++)
@@ -71,10 +80,10 @@ public class PowerUpSelection : MonoBehaviour
             PowerUpSlot slot = powerUpSlots[i];
 
             slot.descriptionText.text = powerUp.description;
-            Image buttonImage = slot.button.GetComponent<Image>(); // Get the Image component of the button
-            buttonImage.sprite = powerUp.image; // Set the sprite to the power up image
+            Image buttonImage = slot.button.GetComponent<Image>();
+            buttonImage.sprite = powerUp.image;
             slot.button.onClick.RemoveAllListeners();
-            slot.button.onClick.AddListener(() => ApplyPowerUp(powerUp.type));
+            slot.button.onClick.AddListener(() => ApplyPowerUp(powerUp));
             slot.button.interactable = true;
         }
         else
@@ -84,6 +93,8 @@ public class PowerUpSelection : MonoBehaviour
     }
 }
 
+
+
     public void HidePowerUpSelection()
     {
         powerUpUI.SetActive(false);
@@ -91,12 +102,18 @@ public class PowerUpSelection : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    private void ApplyPowerUp(PowerUpType type)
+    private void UpdatePowerUpAvailability()
+{
+    // Re-filter and update UI based on new counts
+    SetupRandomPowerUps();
+}
+
+    private void ApplyPowerUp(PowerUpDetails powerUp)
     {
         Player player = FindObjectOfType<Player>();
         if (player != null)
         {
-            switch (type)
+            switch (powerUp.type)
             {
                 case PowerUpType.GainShieldSlot:
                     player.AddBulletShieldSlot();
@@ -105,7 +122,7 @@ public class PowerUpSelection : MonoBehaviour
                     player.AddLaserShieldSlot();
                     break;
                 case PowerUpType.IncreaseSpeed:
-                    player.IncreaseSpeed();  
+                    player.IncreaseThrustPower();  
                     break;
                 case PowerUpType.IncreaseTurnSpeed:
                     player.IncreaseTurnSpeed();  
@@ -113,9 +130,20 @@ public class PowerUpSelection : MonoBehaviour
                 case PowerUpType.AddBulletShield:
                     player.AddBulletShield();
                     break;
+                case PowerUpType.AddLaserShield:
+                    player.AddLaserShield();
+                    break;
+                case PowerUpType.Portalsize:
+                    player.IncreasePortalSize();
+                    break;
+                case PowerUpType.ShipSize:
+                    player.DecreaseShipSize();
+                    break;
             }
+            powerUp.selectionCount++;
+            UpdatePowerUpAvailability();
             HidePowerUpSelection();
-            player.BecomeInvincible();  // Make the player invincible after selecting a power up
+            player.BecomeInvincible(); 
         }
         else
         {
