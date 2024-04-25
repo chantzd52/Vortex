@@ -33,6 +33,9 @@ public class Player : MonoBehaviour
     public AudioSource audioSource; // The AudioSource component
     public AudioClip Powerup; // The powerup sound clip
 
+    public AudioSource hurtSource; // The AudioSource component
+    public AudioClip hurt; // The hurt sound clip
+
     public float thrustPower = 5f;
     public float rotationSpeed = 200f;
 
@@ -121,14 +124,17 @@ public class Player : MonoBehaviour
         {
             currentBulletShields--;
             UpdateUI();
+            hurtSource.PlayOneShot(hurt);  // Play the hurt sound clip
         }
         else if (other.CompareTag("Laser") && currentLaserShields > 0 || other.CompareTag("LaserEvent") && currentLaserShields > 0)
         {
             currentLaserShields--;
             UpdateUI();
+            hurtSource.PlayOneShot(hurt);  // Play the hurt sound clip
         }
-        else if (other.CompareTag("Bullet") && currentBulletShields == 0 || other.CompareTag("Laser") && currentLaserShields == 0 || other.CompareTag("LaserEvent") && currentLaserShields == 0)
+        else if (other.CompareTag("Bullet") && currentBulletShields == 0 || other.CompareTag("Laser") && currentLaserShields == 0 || other.CompareTag("LaserEvent") && currentLaserShields == 0 || other.CompareTag("Enemy") && currentBulletShields == 0)
         {
+            
             PlayerDead();
         }
         else if (other.CompareTag("AddBulletShieldPowerUp"))
@@ -141,22 +147,30 @@ public class Player : MonoBehaviour
             Destroy(other.gameObject); // Destroy the power-up object
             AddLaserShield(); // Increase laser shield count
         }
-        else if (other.CompareTag("Enemy") && OntouchKillEnemy)
+        else if (other.CompareTag("Enemy") && currentBulletShields > 0)
         {
-            Destroy(other.gameObject);  // Destroy the enemy on touch if the flag is true
-        }
-        else if (other.CompareTag("Enemy") && !OntouchKillEnemy)
         {
-            PlayerDead();
+            currentBulletShields--;
+            UpdateUI();
+            hurtSource.PlayOneShot(hurt); 
+            other.GetComponent<EnemyHealth>().Die();
         }
+    }
     }
 
     void PlayerDead()
     {
         Debug.Log("Player dead");
-        DestroyEnemiesAndPortals();
-        Destroy(gameObject); // Destroy player object
+        hurtSource.PlayOneShot(hurt);  // Play the hurt sound clip
+        StartCoroutine(DestroyAfterSound());
     }
+
+    IEnumerator DestroyAfterSound()
+{
+    yield return new WaitForSeconds(hurt.length);  // Wait for the length of the hurt sound
+    DestroyEnemiesAndPortals();
+    Destroy(gameObject); // Destroy player object after the sound has played
+}
 
     void DestroyEnemiesAndPortals()
     {

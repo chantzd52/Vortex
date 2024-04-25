@@ -8,9 +8,16 @@ public class Bullet : MonoBehaviour
     public GameObject explosionPrefab;
     private GameObject shooter;  // Reference to the object that shot the bullet
 
+    public AudioSource audioSource; // The AudioSource component
+    public AudioClip bullet; // The powerup sound clip
+
+
     void Start()
     {
         GetComponent<Rigidbody2D>().velocity = transform.up * speed;
+        //play sound of bullet shooting
+        audioSource.PlayOneShot(bullet);
+
     }
 
     // Call this method when creating the bullet to set its shooter

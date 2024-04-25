@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; 
+using System;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,7 +15,11 @@ public class GameManager : MonoBehaviour
     public Blink Blink;
 
     public PowerUpSelection powerUpSelection;
-    
+
+    public TextMeshProUGUI timerText; // Reference to a TextMeshProUGUI component to display the timer
+
+    private float startTime;
+    private bool timerActive = false;
 
     private GameObject currentPlayer;
 
@@ -29,6 +35,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         CheckPlayerStatus();
+        UpdateTimer();
     }
 
     void StartGame()
@@ -36,9 +43,12 @@ public class GameManager : MonoBehaviour
         if (currentPlayer == null)
         {
             SpawnPlayer();
+            StartTimer();
+            
         }
         enemySpawner.ResetSpawner(); // Start or restart enemy spawning
         powerUpSelection.HidePowerUpSelection();
+        
     }
 
     void CheckPlayerStatus()
@@ -87,9 +97,44 @@ public class GameManager : MonoBehaviour
 
         public void PlayerDied()
     {
+
+        StopTimer();
         powerUpSelection.HidePowerUpSelection();
         respawnButton.gameObject.SetActive(true);
+        
         // Handle other game over logic here
+    }
+
+        private void StartTimer()
+    {
+        startTime = Time.time;
+        timerActive = true;
+    }
+
+    private void StopTimer()
+    {
+        timerActive = false;
+    }
+
+    private void ResetTimer()
+    {
+        StartTimer(); // Restart timer
+        timerText.text = FormatTime(0); // Reset the display to zero
+    }
+
+    private void UpdateTimer()
+    {
+        if (timerActive)
+        {
+            float timeElapsed = Time.time - startTime;
+            timerText.text = FormatTime(timeElapsed);
+        }
+    }
+
+    private string FormatTime(float time)
+    {
+        TimeSpan timeSpan = TimeSpan.FromSeconds(time);
+        return string.Format("{0:D2}:{1:D2}:{2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
     }
 
     public void RespawnPlayer()
@@ -99,6 +144,8 @@ public class GameManager : MonoBehaviour
             SpawnPlayer();
             enemySpawner.ResetSpawner(); // Ensure enemy spawning continues
             enemySpawner.ResetEvents(); // Reset events
+            ResetTimer();
+            
         }
     }
 }

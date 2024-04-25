@@ -13,6 +13,9 @@ public class LaserController : MonoBehaviour
     private bool isActive = false;
     private bool movingToTarget = true;
 
+    public AudioSource audioSource;
+    public AudioClip laserSound;
+
     void Start()
     {
         startPosition = transform.position;
@@ -52,6 +55,7 @@ public class LaserController : MonoBehaviour
     {
         isActive = true;
         gameObject.SetActive(true);  // Make the laser visible and active
+        audioSource.PlayOneShot(laserSound);
     }
 
     public void DeactivateLaser()
@@ -59,6 +63,7 @@ public class LaserController : MonoBehaviour
         isActive = false;
         gameObject.SetActive(false);  // Hide the laser and stop it from updating
         ResetPosition();
+        audioSource.Stop();
     }
 
     public void ResetPosition()

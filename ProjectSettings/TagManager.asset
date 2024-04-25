@@ -14,6 +14,7 @@ TagManager:
   - LaserEvent
   - AddBulletShieldPowerUp
   - AddLazerShieldPowerUp
+  - SurvivalTimer
   layers:
   - Default
   - TransparentFX

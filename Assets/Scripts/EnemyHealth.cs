@@ -11,6 +11,9 @@ public class EnemyHealth : MonoBehaviour
 
     public event Action OnDeath; // Event to signal death of the enemy
 
+    public AudioSource audioSource; // Audio source for the enemy
+    public AudioClip hurtSound; // Sound to play when the enemy is hurt
+
     
     [Serializable]
     public class DropItem
@@ -28,21 +31,25 @@ public class EnemyHealth : MonoBehaviour
         {
             bulletShield--;
             Destroy(other.gameObject); // Destroy the bullet
+            audioSource.PlayOneShot(hurtSound); // Play the hurt sound
         }
         else if (other.CompareTag("Laser") && laserShield > 0)
         {
             laserShield--;
             Destroy(other.gameObject); // Destroy the laser
+            audioSource.PlayOneShot(hurtSound); // Play the hurt sound
         }
         else if ((other.CompareTag("Bullet") && bulletShield == 0) || (other.CompareTag("Laser") && laserShield == 0))
         {
+            
             Die();
             Debug.Log("Ship hit! Explosion and destruction logic here.");
         }
     }
 
-    public void Die()
+    IEnumerator DestroyAfterSound()
     {
+        yield return new WaitForSeconds(hurtSound.length);
         Player player = FindObjectOfType<Player>(); // Find the player instance
         if (player != null)
         {
@@ -52,6 +59,12 @@ public class EnemyHealth : MonoBehaviour
         Destroy(gameObject); // Destroy the enemy object
         OnDeath?.Invoke(); // Notify all subscribers that this enemy has died
         Destroy(gameObject); // Destroy this enemy object
+    }
+
+    public void Die()
+    {
+        audioSource.PlayOneShot(hurtSound); // Play the hurt sound
+        StartCoroutine(DestroyAfterSound());
     }
 
     private void HandleDrop()

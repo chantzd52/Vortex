@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 8384220829905729535}
   - component: {fileID: -3966137843938435620}
   - component: {fileID: -7389915867924233150}
-  - component: {fileID: 6875351254455859369}
-  m_Layer: 7
-  m_Name: 'Enemy Squires '
+  - component: {fileID: 846631325190747274}
+  m_Layer: 0
+  m_Name: LazerLV.2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a0823f2f9010ec248b17d4ae56914559, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 962b88c05498ba7438d9df5e99a0be31, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,7 +99,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 6392242013120767191}
   m_BodyType: 0
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 2.5
   m_LinearDrag: 1
@@ -152,7 +152,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.18, y: 0.21}
+    oldSize: {x: 0.29, y: 0.24}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -160,19 +160,26 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.07863313, y: -0.04188113}
-      - {x: 0.078668, y: 0.04396385}
+    - - {x: 0.13675988, y: -0.061256707}
+      - {x: 0.11103952, y: -0.023497641}
+      - {x: 0.056338847, y: 0.013609134}
+      - {x: 0.053848922, y: 0.06664359}
+      - {x: 0.0321666, y: 0.08581511}
       - {x: 0.028821588, y: 0.044997036}
-      - {x: 0.021456063, y: 0.047087274}
+      - {x: 0.031531394, y: 0.08583844}
       - {x: 0.018455863, y: 0.08636048}
       - {x: 0.0028039217, y: 0.09508759}
-      - {x: -0.01909864, y: 0.08403277}
-      - {x: -0.021728933, y: 0.04666868}
-      - {x: -0.07944757, y: 0.043463252}
-      - {x: -0.07758075, y: -0.040279076}
-      - {x: -0.05681652, y: -0.07150902}
-      - {x: -0.004330635, y: -0.08795525}
-      - {x: 0.05417961, y: -0.07276623}
+      - {x: -0.034599125, y: 0.08558282}
+      - {x: -0.053504884, y: 0.06914435}
+      - {x: -0.061622083, y: 0.015562423}
+      - {x: -0.13183236, y: -0.041829124}
+      - {x: -0.06456679, y: -0.052133456}
+      - {x: -0.046117187, y: -0.047491476}
+      - {x: -0.037203968, y: -0.062064677}
+      - {x: -0.0004554987, y: -0.10423073}
+      - {x: 0.040422738, y: -0.0557286}
+      - {x: 0.034222543, y: -0.04952842}
+      - {x: 0.060379803, y: -0.05106558}
   m_UseDelaunayMesh: 0
 --- !u!114 &-3966137843938435620
 MonoBehaviour:
@@ -187,20 +194,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 254483009701040382, guid: cc651bd43c80e4346b027de074698f47, type: 3}
-  bulletPrefab: {fileID: 6865853227883485904, guid: 82ded78337cc04b4da278f723fe18c4a, type: 3}
+  bulletPrefab: {fileID: 6865853227883485904, guid: eafc5a71b5d625545ba04fcff87c3935, type: 3}
   approachDistance: 2
-  retreatDistance: 0
+  retreatDistance: 1
   shootingDistance: 8
-  shotsPerBurst: 3
-  numberOfBursts: 3
+  shotsPerBurst: 1
+  numberOfBursts: 1
   shootingRate: 0.2
   speed: 0.5
-  spreadCount: 1
-  spreadAngle: 0
-  useSpreadShot: 0
+  spreadCount: 5
+  spreadAngle: 45
+  useSpreadShot: 1
   enableLooping: 0
   loopInterval: 5
-  loopDuration: 10
+  loopDuration: 2
 --- !u!114 &-7389915867924233150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,14 +222,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletShield: 0
   laserShield: 0
-  xpValue: 100
-  audioSource: {fileID: 6875351254455859369}
+  xpValue: 125
+  audioSource: {fileID: 846631325190747274}
   hurtSound: {fileID: 8300000, guid: 8f1d5a9480a97a5469fb5f20121f26db, type: 3}
   dropItems:
   - item: {fileID: 6865853227883485904, guid: 142a792479b652e43acd594ae17d84cd, type: 3}
   - item: {fileID: 6865853227883485904, guid: 5bb2253ad65b2d74985df9b3b45ec893, type: 3}
   dropChance: 0.7
---- !u!82 &6875351254455859369
+--- !u!82 &846631325190747274
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

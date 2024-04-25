@@ -695,6 +695,108 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &166814816
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 166814820}
+  - component: {fileID: 166814819}
+  - component: {fileID: 166814818}
+  - component: {fileID: 166814817}
+  m_Layer: 5
+  m_Name: TimerCanvas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &166814817
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166814816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &166814818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166814816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!223 &166814819
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166814816}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 1
+  m_Camera: {fileID: 519420031}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 1
+  m_TargetDisplay: 0
+--- !u!224 &166814820
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166814816}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2097786648}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1 &185285273
 GameObject:
   m_ObjectHideFlags: 0
@@ -990,25 +1092,25 @@ MonoBehaviour:
   availablePowerUps:
   - name: General Shield Slot
     image: {fileID: 21300000, guid: a060ca7e4d8e8fe42a662402d4369be9, type: 3}
-    description: Increase your General shield slot
+    description: Add a General shield slot
     type: 0
     selectionCount: 0
     maxSelections: 3
   - name: Lazer Shield Slot
     image: {fileID: 21300000, guid: 945dc5f9d8f87de4e904472d9a1b72d0, type: 3}
-    description: Increase your Lazer Shield slots
+    description: Add a Lazer Shield slot
     type: 1
     selectionCount: 0
     maxSelections: 3
   - name: PortalSize
     image: {fileID: 21300000, guid: 056fcf80cd9a8494cb1fd93f83f78e8f, type: 3}
-    description: Increase the size of your portals
+    description: Increase portal size
     type: 6
     selectionCount: 0
     maxSelections: 3
   - name: Increase Speed
     image: {fileID: 21300000, guid: dfb59f263c6439147ac8e05c416a65b0, type: 3}
-    description: Increase the speed of your ship
+    description: Increase ship speed
     type: 2
     selectionCount: 0
     maxSelections: 3
@@ -1020,7 +1122,7 @@ MonoBehaviour:
     maxSelections: 3
   - name: Blender
     image: {fileID: 21300000, guid: bbd6e19bd153e0f4192868ba1c376a44, type: 3}
-    description: Increase odds of portals killing by 20%
+    description: 'Blender: Add 20% chance to kill enemys in teleporter'
     type: 8
     selectionCount: 0
     maxSelections: 3
@@ -1032,13 +1134,13 @@ MonoBehaviour:
     maxSelections: 3
   - name: Shield Power up
     image: {fileID: 21300000, guid: a060ca7e4d8e8fe42a662402d4369be9, type: 3}
-    description: Fill in an empty General shield slot
+    description: General shield power up
     type: 4
     selectionCount: 0
     maxSelections: 150
   - name: Lazer Shield Power up
     image: {fileID: 21300000, guid: 945dc5f9d8f87de4e904472d9a1b72d0, type: 3}
-    description: Fill in an empty lazer shield slot
+    description: Lazer shield power up
     type: 5
     selectionCount: 0
     maxSelections: 150
@@ -2433,6 +2535,7 @@ MonoBehaviour:
   enemySpawner: {fileID: 1897806465}
   Blink: {fileID: 0}
   powerUpSelection: {fileID: 224796068}
+  timerText: {fileID: 2097786646}
 --- !u!4 &998154546
 Transform:
   m_ObjectHideFlags: 0
@@ -2497,7 +2600,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6824278550851871492, guid: 231a14b713aaf9f449f53aa0a6861d97, type: 3}
       propertyPath: m_LocalScale.y
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6824278550851871492, guid: 231a14b713aaf9f449f53aa0a6861d97, type: 3}
       propertyPath: m_LocalScale.z
@@ -2505,7 +2608,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6824278550851871492, guid: 231a14b713aaf9f449f53aa0a6861d97, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.193
+      value: -7.877
       objectReference: {fileID: 0}
     - target: {fileID: 6824278550851871492, guid: 231a14b713aaf9f449f53aa0a6861d97, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2541,6 +2644,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6824278550851871492, guid: 231a14b713aaf9f449f53aa0a6861d97, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6824278550851871492, guid: 231a14b713aaf9f449f53aa0a6861d97, type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -2876,10 +2983,10 @@ AudioSource:
   m_GameObject: {fileID: 1571449047}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: a88a647ab3f0ba44e8c3a461262c4c47, type: 3}
+  OutputAudioMixerGroup: {fileID: -3122976059743139022, guid: 44138aacb75537541b2e7022164ec4c9, type: 2}
+  m_audioClip: {fileID: 8300000, guid: a6e77705299d5ad4db96b591c12b7d88, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.2
+  m_Volume: 0.083
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3635,11 +3742,12 @@ MonoBehaviour:
     waveDuration: 60
   - levelEnemies:
     - {fileID: 6392242013120767191, guid: a4b3aa307c979f944af50c3b751761d8, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
     spawnInterval: 4
     maxEnemies: 6
     waveDuration: 60
   - levelEnemies:
-    - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
     - {fileID: 6392242013120767191, guid: a4b3aa307c979f944af50c3b751761d8, type: 3}
     - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
     spawnInterval: 4
@@ -3647,7 +3755,7 @@ MonoBehaviour:
     waveDuration: 70
   - levelEnemies:
     - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
-    - {fileID: 6392242013120767191, guid: a4b3aa307c979f944af50c3b751761d8, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
     - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
     spawnInterval: 4
     maxEnemies: 8
@@ -3660,20 +3768,76 @@ MonoBehaviour:
     maxEnemies: 12
     waveDuration: 130
   - levelEnemies:
-    - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
-    - {fileID: 6392242013120767191, guid: a4b3aa307c979f944af50c3b751761d8, type: 3}
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    spawnInterval: 2
+    maxEnemies: 12
+    waveDuration: 200
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    spawnInterval: 2
+    maxEnemies: 15
+    waveDuration: 300
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    spawnInterval: 2
+    maxEnemies: 12
+    waveDuration: 200
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    spawnInterval: 2
+    maxEnemies: 12
+    waveDuration: 200
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
     - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
     spawnInterval: 2
     maxEnemies: 12
     waveDuration: 130
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    spawnInterval: 2
+    maxEnemies: 25
+    waveDuration: 300
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    spawnInterval: 2
+    maxEnemies: 25
+    waveDuration: 300
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    spawnInterval: 2
+    maxEnemies: 25
+    waveDuration: 300
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    spawnInterval: 2
+    maxEnemies: 25
+    waveDuration: 300
   events:
   - eventPrefab: {fileID: 644713033}
-    duration: 20
-    isActive: 0
+    duration: 15
+    isActive: 1
     targetTransform: {fileID: 0}
   - eventPrefab: {fileID: 1467473386}
-    duration: 20
-    isActive: 0
+    duration: 15
+    isActive: 1
     targetTransform: {fileID: 0}
   spawnPoints:
   - {fileID: 1034602089}
@@ -3684,7 +3848,7 @@ MonoBehaviour:
   - {fileID: 2051738496}
   - {fileID: 27851579}
   - {fileID: 573068605}
-  eventInterval: 20
+  eventInterval: 75
 --- !u!4 &1897806466
 Transform:
   m_ObjectHideFlags: 0
@@ -3914,6 +4078,140 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1425320014}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2097786645
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2097786648}
+  - component: {fileID: 2097786647}
+  - component: {fileID: 2097786646}
+  m_Layer: 5
+  m_Name: SurvivalTime
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2097786646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2097786645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: 00:00:00
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 3132338987f0e1e49a95ed519115ca1e, type: 2}
+  m_sharedMaterial: {fileID: -2467550627544835726, guid: 3132338987f0e1e49a95ed519115ca1e, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 25
+  m_fontSizeBase: 36
+  m_fontWeight: 400
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &2097786647
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2097786645}
+  m_CullTransparentMesh: 1
+--- !u!224 &2097786648
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2097786645}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 166814820}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 457.2, y: 291.6}
+  m_SizeDelta: {x: 200, y: 50}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2140951513
 GameObject:
   m_ObjectHideFlags: 0
@@ -4137,3 +4435,4 @@ SceneRoots:
   - {fileID: 1496350878}
   - {fileID: 1978754634}
   - {fileID: 213842897}
+  - {fileID: 166814820}

@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 8384220829905729535}
   - component: {fileID: -3966137843938435620}
   - component: {fileID: -7389915867924233150}
-  - component: {fileID: 6875351254455859369}
+  - component: {fileID: -7003509584362898998}
   m_Layer: 7
-  m_Name: 'Enemy Squires '
+  m_Name: GuyV2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -188,16 +188,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 254483009701040382, guid: cc651bd43c80e4346b027de074698f47, type: 3}
   bulletPrefab: {fileID: 6865853227883485904, guid: 82ded78337cc04b4da278f723fe18c4a, type: 3}
-  approachDistance: 2
-  retreatDistance: 0
+  approachDistance: 3
+  retreatDistance: 3
   shootingDistance: 8
   shotsPerBurst: 3
   numberOfBursts: 3
-  shootingRate: 0.2
+  shootingRate: 0.5
   speed: 0.5
-  spreadCount: 1
-  spreadAngle: 0
-  useSpreadShot: 0
+  spreadCount: 5
+  spreadAngle: 45
+  useSpreadShot: 1
   enableLooping: 0
   loopInterval: 5
   loopDuration: 10
@@ -215,14 +215,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletShield: 0
   laserShield: 0
-  xpValue: 100
-  audioSource: {fileID: 6875351254455859369}
+  xpValue: 125
+  audioSource: {fileID: -7003509584362898998}
   hurtSound: {fileID: 8300000, guid: 8f1d5a9480a97a5469fb5f20121f26db, type: 3}
   dropItems:
   - item: {fileID: 6865853227883485904, guid: 142a792479b652e43acd594ae17d84cd, type: 3}
   - item: {fileID: 6865853227883485904, guid: 5bb2253ad65b2d74985df9b3b45ec893, type: 3}
   dropChance: 0.7
---- !u!82 &6875351254455859369
+--- !u!82 &-7003509584362898998
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

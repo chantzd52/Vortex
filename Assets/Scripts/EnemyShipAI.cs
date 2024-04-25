@@ -113,25 +113,48 @@ public class EnemyShipAI : MonoBehaviour
         }
     }
 
-    void Shoot()
+        private void Shoot()
+{
+    if (Time.time > lastShotTime + 1f / shootingRate && currentShotCount < shotsPerBurst)
     {
-        if (Time.time > lastShotTime + 1f / shootingRate && currentShotCount < shotsPerBurst)
-        {
-            AimAndShoot();
-            lastShotTime = Time.time;
-            currentShotCount++;
+        // Check for the type of shooting based on an enemy property or directly using a condition
+        if (useSpreadShot) {
+            AimAndShootSpread();  // Call a method similar to the previous example for spread shot
+        } else {
+            AimAndShoot();  // Straight shot
         }
 
-        if (currentShotCount >= shotsPerBurst)
+        lastShotTime = Time.time;
+        currentShotCount++;
+    }
+
+    if (currentShotCount >= shotsPerBurst)
+    {
+        currentShotCount = 0;
+        currentBurstCount++;
+        if (currentBurstCount >= numberOfBursts)
         {
-            currentShotCount = 0;
-            currentBurstCount++;
-            if (currentBurstCount >= numberOfBursts)
-            {
-                currentBurstCount = 0; // Optionally change state here
-            }
+            currentState = State.Retreating;
+            currentBurstCount = 0;
         }
     }
+}
+
+    private void AimAndShootSpread()
+{
+    float angleStep = spreadAngle / (spreadCount - 1);  // Calculate the angle between each bullet in the spread
+    float startingAngle = -spreadAngle / 2;            // Start from the leftmost bullet
+
+    for (int i = 0; i < spreadCount; i++)
+    {
+        float angle = startingAngle + angleStep * i;    // Calculate the angle for each bullet
+        Quaternion rotation = Quaternion.Euler(0, 0, transform.eulerAngles.z + angle);
+        Vector3 spawnPosition = transform.position + transform.up * 0.5f; // Position a little ahead of the enemy to avoid self-collision
+
+        GameObject bullet = Instantiate(bulletPrefab, spawnPosition, rotation);
+        bullet.GetComponent<Bullet>().SetShooter(gameObject);
+    }
+}
 
     void AimAndShoot()
     {
