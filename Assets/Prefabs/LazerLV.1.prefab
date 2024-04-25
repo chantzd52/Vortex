@@ -222,7 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletShield: 0
   laserShield: 0
-  xpValue: 100
+  xpValue: 125
   audioSource: {fileID: 2043086259127839365}
   hurtSound: {fileID: 8300000, guid: 8f1d5a9480a97a5469fb5f20121f26db, type: 3}
   dropItems:

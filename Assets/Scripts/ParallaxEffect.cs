@@ -4,31 +4,51 @@ using UnityEngine;
 
 public class ParallaxEffect : MonoBehaviour
 {
-    public Transform cameraTransform;
-    public float parallaxMultiplier;
+    public float parallaxMultiplier = 0.02f; // Reduced multiplier for subtle effect
 
-    private Vector3 lastCameraPosition;
-    private float textureUnitSizeX;
+    private Transform playerTransform;
+    private Vector3 lastPlayerPosition;
+    private Vector3 initialPosition; // Store the initial position of the background
 
     void Start()
     {
-        lastCameraPosition = cameraTransform.position;
-        Sprite sprite = GetComponent<SpriteRenderer>().sprite;
-        Texture2D texture = sprite.texture;
-        textureUnitSizeX = texture.width / sprite.pixelsPerUnit;
+        initialPosition = transform.position; // Save the initial position
+
+        // Initialize player position tracking if the player exists at start
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            playerTransform = player.transform;
+            lastPlayerPosition = playerTransform.position;
+        }
     }
 
-    void LateUpdate()
+    void Update()
     {
-        Vector3 deltaMovement = cameraTransform.position - lastCameraPosition;
-        transform.position += deltaMovement * parallaxMultiplier;
-        lastCameraPosition = cameraTransform.position;
-
-        // Repeat the background when it ends
-        if (Mathf.Abs(cameraTransform.position.x - transform.position.x) >= textureUnitSizeX)
+        // Ensure the player is assigned
+        if (playerTransform == null)
         {
-            float offsetPositionX = (cameraTransform.position.x - transform.position.x) % textureUnitSizeX;
-            transform.position = new Vector3(cameraTransform.position.x + offsetPositionX, transform.position.y);
+            FindPlayer();
+            return; // Exit if no player is found
+        }
+
+        if (lastPlayerPosition != null) {
+            Vector3 deltaMovement = playerTransform.position - lastPlayerPosition;
+            float parallaxEffect = deltaMovement.x * parallaxMultiplier;
+
+            // Apply the parallax effect based on the initial position
+            transform.position = initialPosition + new Vector3(parallaxEffect, 0, 0);
+            lastPlayerPosition = playerTransform.position;
+        }
+    }
+
+    private void FindPlayer()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            playerTransform = player.transform;
+            lastPlayerPosition = playerTransform.position;
         }
     }
 }
