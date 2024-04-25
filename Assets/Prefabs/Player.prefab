@@ -192,7 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bluePortalPrefab: {fileID: 2318222690110398993, guid: 489796f53dfc55a4bb4f403e603725e3, type: 3}
   redPortalPrefab: {fileID: 4192561162801377119, guid: 834f605e5d1f50c46b56e0e27612f640, type: 3}
-  teleportCooldownDuration: 1
+  teleportCooldownDuration: 0.5
   allowedPlacementArea: {fileID: 5745411821591402528, guid: 689e5314a9de0ca4cb9392ccbf5621a5, type: 3}
   blenderOdds: 0
 --- !u!114 &1142662571053661518
