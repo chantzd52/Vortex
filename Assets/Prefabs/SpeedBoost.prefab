@@ -188,13 +188,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 254483009701040382, guid: cc651bd43c80e4346b027de074698f47, type: 3}
   bulletPrefab: {fileID: 6865853227883485904, guid: 82ded78337cc04b4da278f723fe18c4a, type: 3}
-  approachDistance: 2
+  approachDistance: 3
   retreatDistance: 0
   shootingDistance: 8
   shotsPerBurst: 3
   numberOfBursts: 3
   shootingRate: 0.2
-  speed: 1
+  speed: 1.5
   spreadCount: 1
   spreadAngle: 0
   useSpreadShot: 0

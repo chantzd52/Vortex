@@ -4852,11 +4852,11 @@ MonoBehaviour:
   waves:
   - levelEnemies:
     - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
-    - {fileID: 6392242013120767191, guid: fca96100f1a1764438472c61bdcde8c8, type: 3}
     - {fileID: 6392242013120767191, guid: a4b3aa307c979f944af50c3b751761d8, type: 3}
-    spawnInterval: 5
+    - {fileID: 6392242013120767191, guid: fca96100f1a1764438472c61bdcde8c8, type: 3}
+    spawnInterval: 4
     maxEnemies: 6
-    waveDuration: 60
+    waveDuration: 45
   - levelEnemies:
     - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
     - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
@@ -4873,7 +4873,7 @@ MonoBehaviour:
     - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
     - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
     - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
-    - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
+    - {fileID: 6392242013120767191, guid: 5d09038ef29275e418f46e108010375a, type: 3}
     spawnInterval: 3
     maxEnemies: 8
     waveDuration: 70
@@ -4882,24 +4882,26 @@ MonoBehaviour:
     - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
     - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
     - {fileID: 6392242013120767191, guid: fca96100f1a1764438472c61bdcde8c8, type: 3}
-    - {fileID: 6392242013120767191, guid: fca96100f1a1764438472c61bdcde8c8, type: 3}
+    - {fileID: 6392242013120767191, guid: b0e00345b9a2da546a031a0bfe954dfe, type: 3}
     - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
-    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
     spawnInterval: 2
     maxEnemies: 8
-    waveDuration: 130
+    waveDuration: 70
   - levelEnemies:
-    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
-    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
-    - {fileID: 6392242013120767191, guid: b0e00345b9a2da546a031a0bfe954dfe, type: 3}
-    - {fileID: 6392242013120767191, guid: fca96100f1a1764438472c61bdcde8c8, type: 3}
-    spawnInterval: 4
-    maxEnemies: 12
-    waveDuration: 130
-  - levelEnemies:
-    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
-    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
     - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    spawnInterval: 1
+    maxEnemies: 16
+    waveDuration: 34
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
+    - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    - {fileID: 6392242013120767191, guid: a4b3aa307c979f944af50c3b751761d8, type: 3}
     - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
     - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
     - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
@@ -4907,21 +4909,21 @@ MonoBehaviour:
     maxEnemies: 8
     waveDuration: 60
   - levelEnemies:
-    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
-    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
-    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
-    spawnInterval: 4
-    maxEnemies: 6
-    waveDuration: 45
-  - levelEnemies:
-    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
-    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
     - {fileID: 6392242013120767191, guid: fca96100f1a1764438472c61bdcde8c8, type: 3}
-    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
     - {fileID: 6392242013120767191, guid: b0e00345b9a2da546a031a0bfe954dfe, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
     spawnInterval: 1
     maxEnemies: 8
-    waveDuration: 200
+    waveDuration: 30
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
+    - {fileID: 6392242013120767191, guid: fca96100f1a1764438472c61bdcde8c8, type: 3}
+    - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
+    - {fileID: 6392242013120767191, guid: fca96100f1a1764438472c61bdcde8c8, type: 3}
+    spawnInterval: 1
+    maxEnemies: 8
+    waveDuration: 40
   - levelEnemies:
     - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
     - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
@@ -4930,42 +4932,127 @@ MonoBehaviour:
     - {fileID: 6392242013120767191, guid: fca96100f1a1764438472c61bdcde8c8, type: 3}
     spawnInterval: 1
     maxEnemies: 12
-    waveDuration: 200
+    waveDuration: 40
   - levelEnemies:
     - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
     - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
     - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    - {fileID: 6392242013120767191, guid: b0e00345b9a2da546a031a0bfe954dfe, type: 3}
     spawnInterval: 2
     maxEnemies: 12
-    waveDuration: 130
+    waveDuration: 40
   - levelEnemies:
     - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
     - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
     - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
     spawnInterval: 2
     maxEnemies: 25
-    waveDuration: 300
+    waveDuration: 50
   - levelEnemies:
     - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
     - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
     - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
-    spawnInterval: 2
+    spawnInterval: 1
     maxEnemies: 25
-    waveDuration: 300
+    waveDuration: 50
   - levelEnemies:
     - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
     - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
     - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
-    spawnInterval: 2
+    spawnInterval: 1
     maxEnemies: 25
-    waveDuration: 300
+    waveDuration: 50
   - levelEnemies:
     - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
     - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
     - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
-    spawnInterval: 2
+    spawnInterval: 1
     maxEnemies: 25
-    waveDuration: 300
+    waveDuration: 50
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    spawnInterval: 1
+    maxEnemies: 25
+    waveDuration: 50
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    spawnInterval: 1
+    maxEnemies: 25
+    waveDuration: 50
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    spawnInterval: 1
+    maxEnemies: 25
+    waveDuration: 50
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    spawnInterval: 1
+    maxEnemies: 25
+    waveDuration: 50
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    spawnInterval: 1
+    maxEnemies: 25
+    waveDuration: 50
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    spawnInterval: 1
+    maxEnemies: 25
+    waveDuration: 50
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    spawnInterval: 1
+    maxEnemies: 25
+    waveDuration: 50
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    spawnInterval: 1
+    maxEnemies: 25
+    waveDuration: 50
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    spawnInterval: 1
+    maxEnemies: 25
+    waveDuration: 50
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    spawnInterval: 1
+    maxEnemies: 25
+    waveDuration: 50
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    spawnInterval: 1
+    maxEnemies: 25
+    waveDuration: 50
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    spawnInterval: 1
+    maxEnemies: 25
+    waveDuration: 50
   events:
   - eventPrefab: {fileID: 644713033}
     duration: 15

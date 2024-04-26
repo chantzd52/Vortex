@@ -193,8 +193,8 @@ MonoBehaviour:
   shootingDistance: 8
   shotsPerBurst: 3
   numberOfBursts: 3
-  shootingRate: 0.2
-  speed: 0.5
+  shootingRate: 0.3
+  speed: 0.7
   spreadCount: 1
   spreadAngle: 0
   useSpreadShot: 0
