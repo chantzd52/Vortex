@@ -515,7 +515,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 85958823}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4118ddc8523b56b4d8930b4e719df66f, type: 3}
   m_Name: 
@@ -1221,7 +1221,7 @@ MonoBehaviour:
     maxSelections: 3
   - name: Blender
     image: {fileID: 21300000, guid: bbd6e19bd153e0f4192868ba1c376a44, type: 3}
-    description: 'Blender: Add 20% chance to kill enemys in teleporter'
+    description: 'Blender: Add 20% chance to kill enemies in teleporter'
     type: 8
     selectionCount: 0
     maxSelections: 3
@@ -2102,7 +2102,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 570012909}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4118ddc8523b56b4d8930b4e719df66f, type: 3}
   m_Name: 
@@ -2309,7 +2309,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 626745495}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4118ddc8523b56b4d8930b4e719df66f, type: 3}
   m_Name: 
@@ -2345,7 +2345,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 679263117}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4118ddc8523b56b4d8930b4e719df66f, type: 3}
   m_Name: 
@@ -3015,7 +3015,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1045339951}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4118ddc8523b56b4d8930b4e719df66f, type: 3}
   m_Name: 
@@ -3113,7 +3113,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1050607480}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4118ddc8523b56b4d8930b4e719df66f, type: 3}
   m_Name: 
@@ -3211,7 +3211,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1126610819}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4118ddc8523b56b4d8930b4e719df66f, type: 3}
   m_Name: 
@@ -3309,7 +3309,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1185684185}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4118ddc8523b56b4d8930b4e719df66f, type: 3}
   m_Name: 
@@ -3407,7 +3407,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1215484762}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4118ddc8523b56b4d8930b4e719df66f, type: 3}
   m_Name: 
@@ -4019,7 +4019,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1584302565}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4118ddc8523b56b4d8930b4e719df66f, type: 3}
   m_Name: 
@@ -4394,7 +4394,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772961699}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4118ddc8523b56b4d8930b4e719df66f, type: 3}
   m_Name: 
@@ -4852,62 +4852,83 @@ MonoBehaviour:
   waves:
   - levelEnemies:
     - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
+    - {fileID: 6392242013120767191, guid: fca96100f1a1764438472c61bdcde8c8, type: 3}
+    - {fileID: 6392242013120767191, guid: a4b3aa307c979f944af50c3b751761d8, type: 3}
     spawnInterval: 5
     maxEnemies: 6
     waveDuration: 60
   - levelEnemies:
-    - {fileID: 6392242013120767191, guid: a4b3aa307c979f944af50c3b751761d8, type: 3}
     - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
-    spawnInterval: 4
-    maxEnemies: 6
-    waveDuration: 60
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    spawnInterval: 1
+    maxEnemies: 12
+    waveDuration: 30
   - levelEnemies:
     - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
-    - {fileID: 6392242013120767191, guid: a4b3aa307c979f944af50c3b751761d8, type: 3}
+    - {fileID: 6392242013120767191, guid: fca96100f1a1764438472c61bdcde8c8, type: 3}
     - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
-    spawnInterval: 4
+    - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
+    - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
+    spawnInterval: 3
     maxEnemies: 8
     waveDuration: 70
   - levelEnemies:
     - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
     - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
     - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
-    spawnInterval: 4
+    - {fileID: 6392242013120767191, guid: fca96100f1a1764438472c61bdcde8c8, type: 3}
+    - {fileID: 6392242013120767191, guid: fca96100f1a1764438472c61bdcde8c8, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    spawnInterval: 2
     maxEnemies: 8
     waveDuration: 130
   - levelEnemies:
-    - {fileID: 6392242013120767191, guid: 9bf6620aeaae7234790e39ffdac25894, type: 3}
-    - {fileID: 6392242013120767191, guid: a4b3aa307c979f944af50c3b751761d8, type: 3}
-    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
-    spawnInterval: 3
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: b0e00345b9a2da546a031a0bfe954dfe, type: 3}
+    - {fileID: 6392242013120767191, guid: fca96100f1a1764438472c61bdcde8c8, type: 3}
+    spawnInterval: 4
     maxEnemies: 12
     waveDuration: 130
   - levelEnemies:
     - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
     - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
     - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
-    spawnInterval: 2
-    maxEnemies: 12
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    spawnInterval: 1
+    maxEnemies: 8
+    waveDuration: 60
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    spawnInterval: 4
+    maxEnemies: 6
+    waveDuration: 45
+  - levelEnemies:
+    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
+    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
+    - {fileID: 6392242013120767191, guid: fca96100f1a1764438472c61bdcde8c8, type: 3}
+    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
+    - {fileID: 6392242013120767191, guid: b0e00345b9a2da546a031a0bfe954dfe, type: 3}
+    spawnInterval: 1
+    maxEnemies: 8
     waveDuration: 200
   - levelEnemies:
     - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
     - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
     - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
-    spawnInterval: 2
-    maxEnemies: 15
-    waveDuration: 300
-  - levelEnemies:
-    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
-    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
     - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
-    spawnInterval: 2
-    maxEnemies: 12
-    waveDuration: 200
-  - levelEnemies:
-    - {fileID: 6392242013120767191, guid: 404a746b95598cf4487bed58907bcf30, type: 3}
-    - {fileID: 6392242013120767191, guid: 799d4044c7e0f884b98df7d1c5efe246, type: 3}
-    - {fileID: 6392242013120767191, guid: 7eaaa1cb0737e9c48b59a34d546d3d88, type: 3}
-    spawnInterval: 2
+    - {fileID: 6392242013120767191, guid: fca96100f1a1764438472c61bdcde8c8, type: 3}
+    spawnInterval: 1
     maxEnemies: 12
     waveDuration: 200
   - levelEnemies:
@@ -5170,7 +5191,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1978754632}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4118ddc8523b56b4d8930b4e719df66f, type: 3}
   m_Name: 
@@ -5349,7 +5370,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 599, y: 375}
+  m_AnchoredPosition: {x: 523, y: 312.3}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2140951513

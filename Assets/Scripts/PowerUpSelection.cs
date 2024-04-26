@@ -55,6 +55,16 @@ public class PowerUpSelection : MonoBehaviour
         SetupRandomPowerUps();
     }
 
+    public void ResetPowerUpCounts()
+    {
+        foreach (PowerUpDetails powerUp in availablePowerUps)
+        {
+            powerUp.selectionCount = 0; // Reset the count
+        }
+        UpdatePowerUpAvailability();
+    }
+
+
    private void SetupRandomPowerUps()
 {
     List<PowerUpDetails> filterAvailablePowerUps = availablePowerUps.FindAll(p =>

@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 6824278550851871492}
   - component: {fileID: 136541747399940489}
   - component: {fileID: 1562208877052234432}
-  - component: {fileID: 3738151030088098464}
-  - component: {fileID: 3496317182997475407}
-  - component: {fileID: 1378278425934310857}
-  - component: {fileID: -7484606521474694615}
-  m_Layer: 0
-  m_Name: DropPod
+  - component: {fileID: 8384220829905729535}
+  - component: {fileID: -3966137843938435620}
+  - component: {fileID: -7389915867924233150}
+  - component: {fileID: 6875351254455859369}
+  m_Layer: 7
+  m_Name: SpeedBoost
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 56783e9f79c5a04418ef1a5031f6e902, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a0823f2f9010ec248b17d4ae56914559, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,10 +99,10 @@ Rigidbody2D:
   m_GameObject: {fileID: 6392242013120767191}
   m_BodyType: 0
   m_Simulated: 1
-  m_UseFullKinematicContacts: 1
+  m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
+  m_Mass: 2.5
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -111,13 +111,13 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
---- !u!61 &3738151030088098464
-BoxCollider2D:
+--- !u!60 &8384220829905729535
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -148,20 +148,33 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0011681914, y: 0.0038940012}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.12, y: 0.17}
+    oldSize: {x: 0.18, y: 0.21}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.06314778, y: 0.14040568}
-  m_EdgeRadius: 0
---- !u!114 &3496317182997475407
+  m_Points:
+    m_Paths:
+    - - {x: 0.07863313, y: -0.04188113}
+      - {x: 0.078668, y: 0.04396385}
+      - {x: 0.028821588, y: 0.044997036}
+      - {x: 0.021456063, y: 0.047087274}
+      - {x: 0.018455863, y: 0.08636048}
+      - {x: 0.0028039217, y: 0.09508759}
+      - {x: -0.01909864, y: 0.08403277}
+      - {x: -0.021728933, y: 0.04666868}
+      - {x: -0.07944757, y: 0.043463252}
+      - {x: -0.07758075, y: -0.040279076}
+      - {x: -0.05681652, y: -0.07150902}
+      - {x: -0.004330635, y: -0.08795525}
+      - {x: 0.05417961, y: -0.07276623}
+  m_UseDelaunayMesh: 0
+--- !u!114 &-3966137843938435620
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -170,17 +183,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 6392242013120767191}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 599b176d1e705f448a3153af445fc5b1, type: 3}
+  m_Script: {fileID: 11500000, guid: f70dfb815eb8b7141aecc76272b5e2f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 254483009701040382, guid: cc651bd43c80e4346b027de074698f47, type: 3}
-  detectionDistance: 2
-  approachSpeed: 4
-  chargeSpeed: 6
-  flashDuration: 2
-  spriteRenderer: {fileID: 136541747399940489}
-  spawnInvulnerabilityDuration: 2
---- !u!114 &1378278425934310857
+  bulletPrefab: {fileID: 6865853227883485904, guid: 82ded78337cc04b4da278f723fe18c4a, type: 3}
+  approachDistance: 2
+  retreatDistance: 0
+  shootingDistance: 8
+  shotsPerBurst: 3
+  numberOfBursts: 3
+  shootingRate: 0.2
+  speed: 1
+  spreadCount: 1
+  spreadAngle: 0
+  useSpreadShot: 0
+  enableLooping: 0
+  loopInterval: 5
+  loopDuration: 10
+--- !u!114 &-7389915867924233150
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,12 +215,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletShield: 0
   laserShield: 0
-  xpValue: 25
-  audioSource: {fileID: -7484606521474694615}
+  xpValue: 125
+  audioSource: {fileID: 6875351254455859369}
   hurtSound: {fileID: 8300000, guid: 8f1d5a9480a97a5469fb5f20121f26db, type: 3}
-  dropItems: []
-  dropChance: 0.25
---- !u!82 &-7484606521474694615
+  dropItems:
+  - item: {fileID: 6865853227883485904, guid: 142a792479b652e43acd594ae17d84cd, type: 3}
+  - item: {fileID: 6865853227883485904, guid: 5bb2253ad65b2d74985df9b3b45ec893, type: 3}
+  dropChance: 0.7
+--- !u!82 &6875351254455859369
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

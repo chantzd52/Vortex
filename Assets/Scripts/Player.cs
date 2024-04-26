@@ -290,10 +290,10 @@ private void UpdateUI()
 
 
 
-public void increaseBlender()
-{
-    portalController.IncreaseBlender();  //use portal controller to increase blender
-}
+    public void increaseBlender()
+    {
+        portalController.IncreaseBlender();  //use portal controller to increase blender
+    }
 
 
     // Call this method to add XP to the player

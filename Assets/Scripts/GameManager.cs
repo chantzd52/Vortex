@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
         {
             SpawnPlayer();
             StartTimer();
-            
+            powerUpSelection.ResetPowerUpCounts();
         }
         enemySpawner.ResetSpawner(); // Start or restart enemy spawning
         powerUpSelection.HidePowerUpSelection();
@@ -191,6 +191,7 @@ public class GameManager : MonoBehaviour
             enemySpawner.ResetSpawner(); // Ensure enemy spawning continues
             enemySpawner.ResetEvents(); // Reset events
             ResetTimer();
+            powerUpSelection.ResetPowerUpCounts();
             
         }
     }
